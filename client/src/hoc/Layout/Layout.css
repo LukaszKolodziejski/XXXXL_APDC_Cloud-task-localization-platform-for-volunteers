@@ -1,0 +1,14 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.Content {
+  /* margin-top: 56px; */
+  /* display: block; */
+  /* display: flex; */
+  margin-top: 7.5vh;
+  background-color: rgb(223, 222, 222);
+  min-height: 92.5vh;
+}
