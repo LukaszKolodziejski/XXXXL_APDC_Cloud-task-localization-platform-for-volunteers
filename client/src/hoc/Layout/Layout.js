@@ -1,12 +1,13 @@
 import React, { Fragment } from "react";
-import classes from "./Layout.module.css";
+import "./Layout.css";
 import Navigation from "../../components/Navigation/Navigation";
 
 const Layout = (props) => {
   return (
     <Fragment>
       <Navigation />
-      <main className={classes.Content}>{props.children}</main>
+      {/* <main className={classes.Content}>{props.children}</main> */}
+      <main className="Content">{props.children}</main>
     </Fragment>
   );
 };
