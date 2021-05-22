@@ -7,8 +7,10 @@ import {
   Marker,
   Polyline,
 } from "react-google-maps";
+import Coin from "../../assets/coin.png";
 
 const myKeyAPI = "AIzaSyB4r-FZ9lWpfLIYkjUjHyOthNeyyMpXJpg";
+
 const MyMapComponent = compose(
   withProps({
     googleMapURL: `https://maps.googleapis.com/maps/api/js?v=3.exp&key=${myKeyAPI}&libraries=geometry,drawing,places`,
@@ -34,17 +36,13 @@ const MyMapComponent = compose(
         onMarkerList((prev) => [
           ...prev,
           <Marker
+            key={markerList.length + 1}
             position={e.latLng}
-            label={`${markerList.length}`}
-            icon={
-              <div
-                className={{ height: "20px", width: "20px", color: "#555" }}
-              ></div>
-            }
+            label={{ text: `${markerList.length + 1}`, color: "#fff" }}
+            icon={Coin}
           />,
         ]);
         onLineDataList((prev) => [...prev, e.latLng]);
-        // onMarkerList((prev) => console.log(prev));
 
         wrapper.current.panTo(e.latLng);
       }}
@@ -52,8 +50,6 @@ const MyMapComponent = compose(
       {props.isMarkerShown && (
         <>
           {markerList}
-          {/* <Marker position={{ lat: 38.7027558, lng: -9.1935418 }} />
-          <Marker position={{ lat: 38.7137558, lng: -9.1535418 }} /> */}
           <Polyline path={lineDataList} />
         </>
       )}
