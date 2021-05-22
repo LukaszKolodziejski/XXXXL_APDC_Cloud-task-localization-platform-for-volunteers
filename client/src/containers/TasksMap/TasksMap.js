@@ -1,17 +1,13 @@
 import React from "react";
+import styles from "./TasksMap.module.css";
+import Maps from "../../components/Maps/Maps";
+import TasksList from "../../components/TasksList/TasksList";
 
 const TasksMap = (props) => {
   return (
-    <div>
-      <section>
-        <div>
-          <div>Nick</div>
-          <div>Go out with dog.</div>
-          <div>data</div>
-          <div>10 Coin</div>
-        </div>
-      </section>
-      <section>Map</section>
+    <div className={styles.TasksMap}>
+      <TasksList />
+      <Maps />
     </div>
   );
 };
