@@ -5,10 +5,7 @@
 }
 
 .Content {
-  /* margin-top: 56px; */
-  /* display: block; */
-  /* display: flex; */
   margin-top: 7.5vh;
-  background-color: rgb(223, 222, 222);
+  background-color: #f2f3f6;
   min-height: 92.5vh;
 }
