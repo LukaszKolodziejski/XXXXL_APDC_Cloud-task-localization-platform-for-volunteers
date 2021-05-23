@@ -2,9 +2,9 @@ import React, { useRef, useEffect } from "react";
 import PropTypes from "prop-types";
 import gsap from "gsap";
 
-import styles from "./StatusAvailable.module.css";
+import styles from "./Online.module.css";
 
-const StatusAvailable = React.memo((props) => {
+const Online = React.memo((props) => {
   const wrapperRing = useRef(null);
   const wrapperCircle = useRef(null);
   const wrapperStatus = useRef(null);
@@ -36,15 +36,15 @@ const StatusAvailable = React.memo((props) => {
     <div className={styles.RingContainer}>
       <div ref={wrapperRing} className={styles.Ringring}></div>
       <div ref={wrapperCircle} className={styles.Circle}></div>
-      <div ref={wrapperStatus} className={styles.StatusAvailable}>
+      <div ref={wrapperStatus} className={styles.Online}>
         {props.status}
       </div>
     </div>
   );
 });
 
-StatusAvailable.propTypes = {
+Online.propTypes = {
   status: PropTypes.string.isRequired,
 };
 
-export default StatusAvailable;
+export default Online;

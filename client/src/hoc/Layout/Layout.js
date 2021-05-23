@@ -4,10 +4,10 @@ import Navigation from "../../components/Navigation/Navigation";
 
 const Layout = (props) => {
   return (
-    <Fragment>
+    <div className="Content">
       <Navigation />
-      <main className="Content">{props.children}</main>
-    </Fragment>
+      {props.children}
+    </div>
   );
 };
 

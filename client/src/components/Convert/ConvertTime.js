@@ -1,6 +1,6 @@
 import React from "react";
 
-const ExpiryDateSingleTask = (props) => {
+const ConvertTime = (props) => {
   const { expiryDate } = props;
 
   const convertDate = (date) => {
@@ -15,4 +15,4 @@ const ExpiryDateSingleTask = (props) => {
   );
 };
 
-export default ExpiryDateSingleTask;
+export default ConvertTime;

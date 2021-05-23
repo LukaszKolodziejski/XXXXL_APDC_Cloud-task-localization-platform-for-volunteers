@@ -2,9 +2,9 @@ import React, { useRef, useEffect } from "react";
 import PropTypes from "prop-types";
 import gsap from "gsap";
 
-import styles from "./StatusProgress.module.css";
+import styles from "./Progress.module.css";
 
-const StatusProgress = (props) => {
+const Progress = (props) => {
   const wrapperDot = useRef(null);
   const wrapperStatus = useRef(null);
   useEffect(() => {
@@ -46,16 +46,16 @@ const StatusProgress = (props) => {
 
   return (
     <div>
-      <div ref={wrapperStatus} className={styles.StatusProgress}>
-        IN PROGRESS
+      <div ref={wrapperStatus} className={styles.Progress}>
+        {props.status}
       </div>
       <span ref={wrapperDot}>{fillArrayDot(3)}</span>
     </div>
   );
 };
 
-StatusProgress.propTypes = {
+Progress.propTypes = {
   status: PropTypes.string.isRequired,
 };
 
-export default StatusProgress;
+export default Progress;

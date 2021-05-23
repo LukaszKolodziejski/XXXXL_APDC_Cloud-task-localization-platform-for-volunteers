@@ -7,7 +7,7 @@ import styles from "./StatusDone.module.css";
 const StatusDone = React.memo((props) => {
   return (
     <div className={styles.Container}>
-      <div className={styles.StatusDone}>DONE / Not confirmed</div>
+      <div className={styles.StatusDone}>{props.status}</div>
     </div>
   );
 });

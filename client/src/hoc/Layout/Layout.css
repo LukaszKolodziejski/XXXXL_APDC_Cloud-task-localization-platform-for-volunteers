@@ -5,7 +5,14 @@
 }
 
 .Content {
+  display: block;
   margin-top: 7.5vh;
+  overflow: auto;
   background-color: #f2f3f6;
-  min-height: 92.5vh;
+  height: 92.5vh;
+}
+
+.Footer {
+  display: block;
+  min-height: 50px;
 }
