@@ -1,0 +1,16 @@
+.RankingList {
+  /* overflow: scroll; */
+  /* background-color: #fff; */
+  display: block;
+  background-color: #f2f3f6;
+  /* background-color: #37f31a; */
+  /* display: flex; */
+  align-items: center;
+  align-content: center;
+  text-align: center;
+  margin-bottom: 50px;
+  /* background-color: #416ceb; */
+  /* background-color: rgb(30, 228, 30); */
+  /* margin: 0 20px; */
+  /* padding: 0 20px; */
+}

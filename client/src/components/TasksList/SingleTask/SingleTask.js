@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./styles/SingleTask.module.css";
-import StatusSingleTask from "./StatusSingleTask/StatusSingleTask";
-import ExpiryDateSingleTask from "./ExpiryDateSingleTask/ExpiryDateSingleTask";
+import Status from "../../Status/Status";
+import ConvertTime from "../../Convert/ConvertTime";
 
 const SingleTask = React.memo((props) => {
   const { id, name, status, expiryDate, coins } = props;
@@ -13,8 +13,8 @@ const SingleTask = React.memo((props) => {
   return (
     <div className={style}>
       <span>{name}</span>
-      <StatusSingleTask status={status} />
-      <ExpiryDateSingleTask expiryDate={expiryDate} />
+      <Status status={status} />
+      <ConvertTime expiryDate={expiryDate} />
       <span className={styles.Coin}>{coins}</span>
     </div>
   );
