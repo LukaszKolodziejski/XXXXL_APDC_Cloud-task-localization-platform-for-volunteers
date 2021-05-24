@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./TasksList.module.css";
 import ListTasksHeader from "./ListTasksHeader/ListTasksHeader";
 import SingleTask from "./SingleTask/SingleTask";
-import tasks from "./tasks.json";
+// import tasks from "./tasks.json";
 
 const TasksList = (props) => {
   const addTask = () => {
@@ -11,7 +11,7 @@ const TasksList = (props) => {
     console.log(date);
   };
 
-  const listOfTasks = tasks.map((task) => (
+  const listOfTasks = props.tasks.map((task) => (
     <SingleTask
       key={task.id}
       id={task.id}
@@ -19,6 +19,7 @@ const TasksList = (props) => {
       status={task.status}
       expiryDate={task.expiryDate}
       coins={task.coins}
+      onActiveDataList={props.onActiveDataList}
     />
   ));
 
