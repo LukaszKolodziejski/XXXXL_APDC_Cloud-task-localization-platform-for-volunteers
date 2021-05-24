@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./NewTasksList.module.css";
-import NewTasksHeader from "./NewTasksHeader/NewTasksHeader";
 import NewSingleTask from "./NewSingleTask/NewSingleTask";
+import TopHeader from "../UX/TopHeader/TopHeader";
 
 const NewTasksList = (props) => {
   const addTask = () => {
@@ -9,6 +9,8 @@ const NewTasksList = (props) => {
     date.setDate(date.getDate() + 2);
     console.log(date);
   };
+
+  const headerNames = ["# Number", "LOCATION", "DESCRIPTION", "COINS"];
 
   console.log(props.newTasksList);
   const listOfTasks = props.newTasksList.map((task) => (
@@ -24,7 +26,7 @@ const NewTasksList = (props) => {
 
   return (
     <section className={styles.NewTasksList}>
-      <NewTasksHeader />
+      <TopHeader styles="NewTasks" names={headerNames} />
       <div>{listOfTasks}</div>
     </section>
   );

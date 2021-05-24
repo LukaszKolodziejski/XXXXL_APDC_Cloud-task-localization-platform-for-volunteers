@@ -1,0 +1,42 @@
+.TopHeader {
+  display: grid;
+  text-align: left;
+  border-bottom: 2px solid #ededf0;
+  background-color: rgb(255, 255, 255);
+
+  span {
+    display: inline-block;
+    color: #9ca7d3;
+    font-family: "Open Sans";
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 44px;
+    &:nth-child(1) {
+      grid-column: 1;
+    }
+    &:nth-child(2) {
+      grid-column: 2;
+    }
+    &:nth-child(3) {
+      grid-column: 3;
+    }
+    &:nth-child(4) {
+      grid-column: 4;
+    }
+  }
+}
+
+.ListTasks {
+  grid-template-columns: 20% 25% 1fr 25%;
+  padding: 20px 0 7px 42px;
+}
+
+.NewTasks {
+  grid-template-columns: 13% 25% 1fr 19%;
+  padding: 20px 0 7px 42px;
+}
+
+.Ranking {
+  grid-template-columns: 11% 20% 1fr 22% 27%;
+  padding: 20px 0 7px 32px;
+}

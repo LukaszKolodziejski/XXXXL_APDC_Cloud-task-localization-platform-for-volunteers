@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./RankingList.module.css";
-import RankingListHeader from "./RankingListHeader/RankingListHeader";
 import RankingSingleUser from "./RankingSingleUser/RankingSingleUser";
+import TopHeader from "../UX/TopHeader/TopHeader";
 import users from "./users.json";
 
 const RankingList = (props) => {
@@ -13,6 +13,14 @@ const RankingList = (props) => {
 
   const sortUser = users.sort((a, b) => (a.coins < b.coins && 1) || -1);
   console.log(sortUser);
+
+  const headerNames = [
+    "# RANK",
+    "PLAYER",
+    "STATUS",
+    "RECEIVED COINS",
+    "COMPLETED ROUND",
+  ];
 
   const listOfTasks = users.map((task, numer) => (
     <RankingSingleUser
@@ -28,7 +36,7 @@ const RankingList = (props) => {
 
   return (
     <section className={styles.RankingList}>
-      <RankingListHeader />
+      <TopHeader styles="Ranking" names={headerNames} />
       <div>{listOfTasks}</div>
     </section>
   );
