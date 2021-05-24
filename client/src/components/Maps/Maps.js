@@ -29,7 +29,7 @@ const MyMapComponent = compose(
     <GoogleMap
       ref={wrapper}
       defaultZoom={12}
-      defaultCenter={{ lat: 38.7042128, lng: -9.2138334 }}
+      defaultCenter={{ lat: 38.7142128, lng: -9.1838334 }}
       onClick={(e) => {
         console.log(e.latLng.lat());
         console.log(e.latLng.lng());
