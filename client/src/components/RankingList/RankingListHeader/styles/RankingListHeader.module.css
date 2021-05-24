@@ -1,9 +1,9 @@
 .RankingListHeader {
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: 10% 20% 1fr 1fr 1fr;
-      grid-template-columns: 10% 20% 1fr 1fr 1fr;
-  padding: 20px 0 7px 42px;
+  -ms-grid-columns: 11% 20% 1fr 22% 27%;
+      grid-template-columns: 11% 20% 1fr 22% 27%;
+  padding: 20px 0 7px 32px;
   text-align: left;
   border-bottom: 2px solid #ededf0;
   background-color: white;
