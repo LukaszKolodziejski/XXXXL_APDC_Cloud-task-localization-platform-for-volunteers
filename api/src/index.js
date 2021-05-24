@@ -25,7 +25,7 @@ app.get("/tasks", (req, res) => {
 });
 
 app.get("/users", (req, res) => {
-  res.send(tasks);
+  res.send(users);
 });
 
 app.get("/tasks/:taskId", (req, res) => {
