@@ -1,10 +1,14 @@
 const express = require("express");
 const app = express();
 const PORT = 8080;
-const servers = require("./servers.json");
+const tasks = require("./tasks.json");
+const users = require("./users.json");
 const ONLINE = "ONLINE";
 const OFFLINE = "OFFLINE";
-const REBOOTING = "REBOOTING";
+const GETTING_COINS = "GETTING_COINS";
+const AVAILABLE = "AVAILABLE";
+const INPROGRESS = "INPROGRESS";
+const DONE = "DONE";
 
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -16,28 +20,32 @@ app.use(function (req, res, next) {
   next();
 });
 
-app.get("/servers", (req, res) => {
-  res.send(servers);
+app.get("/tasks", (req, res) => {
+  res.send(tasks);
 });
 
-app.get("/servers/:serverId", (req, res) => {
+app.get("/users", (req, res) => {
+  res.send(users);
+});
+
+app.get("/tasks/:taskId", (req, res) => {
   const foundServer = findServer(req, res);
 
   res.send(foundServer);
 });
 
-app.put("/servers/:serverId/on", (req, res) => {
+app.put("/tasks/:taskId/on", (req, res) => {
   const foundServer = findServer(req, res);
 
   if (foundServer.status !== OFFLINE) {
-    return res.status(400).send({ errorMessage: `Server is not offline` });
+    return res.status(400).send({ errorMessage: `Task is not offline` });
   }
 
   foundServer.status = ONLINE;
   res.send(foundServer);
 });
 
-app.put("/servers/:serverId/off", (req, res) => {
+app.put("/tasks/:taskId/off", (req, res) => {
   const foundServer = findServer(req, res);
 
   if (foundServer.status !== ONLINE) {
@@ -48,14 +56,14 @@ app.put("/servers/:serverId/off", (req, res) => {
   res.send(foundServer);
 });
 
-app.put(`/servers/:serverId/reboot`, (req, res) => {
+app.put(`/tasks/:taskId/reboot`, (req, res) => {
   const foundServer = findServer(req, res);
 
   if (foundServer.status !== ONLINE) {
     return res.status(400).send({ errorMessage: `Server is not online` });
   }
 
-  foundServer.status = REBOOTING;
+  foundServer.status = GETTING_COINS;
   setTimeout(() => {
     foundServer.status = ONLINE;
   }, getRandomTime(1000, 5000));
@@ -64,11 +72,11 @@ app.put(`/servers/:serverId/reboot`, (req, res) => {
 });
 
 function findServer(req, res) {
-  const serverId = parseInt(req.params.serverId);
+  const taskId = parseInt(req.params.taskId);
 
-  const foundServer = servers.find((it) => it.id === serverId);
+  const foundServer = tasks.find((it) => it.id === taskId);
   if (!foundServer) {
-    throw res.status(404).send({ errorMessage: `Server does not exist` });
+    throw res.status(404).send({ errorMessage: `Task does not exist` });
   }
   return foundServer;
 }
@@ -79,5 +87,6 @@ function getRandomTime(min, max) {
 
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
-  console.log(`Example app listening at http://localhost:${PORT}/servers`);
+  console.log(`Example app listening at http://localhost:${PORT}/tasks`);
+  console.log(`Example app listening at http://localhost:${PORT}/users`);
 });
