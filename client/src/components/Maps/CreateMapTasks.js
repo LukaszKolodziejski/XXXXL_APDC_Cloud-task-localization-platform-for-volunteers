@@ -31,14 +31,16 @@ const MyMapComponent = compose(
       defaultZoom={12}
       defaultCenter={{ lat: 38.7142128, lng: -9.1838334 }}
       onClick={(e) => {
-        console.log(e.latLng.lat());
-        console.log(e.latLng.lng());
+        // console.log(e.latLng.lat());
+        // console.log(e.latLng.lng());
+        const markerId = markerList.length + 1;
+        props.onClickLocation(markerId, e.latLng);
         onMarkerList((prev) => [
           ...prev,
           <Marker
-            key={markerList.length + 1}
+            key={markerId}
             position={e.latLng}
-            label={{ text: `${markerList.length + 1}`, color: "#fff" }}
+            label={{ text: `${markerId}`, color: "#fff" }}
             icon={Coin}
           />,
         ]);
@@ -58,7 +60,9 @@ const MyMapComponent = compose(
 });
 
 const Maps = (props) => {
-  return <MyMapComponent isMarkerShown />;
+  return (
+    <MyMapComponent isMarkerShown onClickLocation={props.onClickLocation} />
+  );
 };
 
 export default Maps;

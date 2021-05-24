@@ -7,8 +7,8 @@ const RankingListHeader = (props) => {
       <span># RANK</span>
       <span>PLAYER</span>
       <span>STATUS</span>
-      <span>COINS</span>
-      <span>TASKS</span>
+      <span>RECEIVED COINS</span>
+      <span>COMPLETED ROUND</span>
     </p>
   );
 };

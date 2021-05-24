@@ -1,15 +1,15 @@
-.ListTasksHeader {
+.NewTasksHeader {
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: 20% 25% 1fr 25%;
-      grid-template-columns: 20% 25% 1fr 25%;
+  -ms-grid-columns: 13% 25% 1fr 19%;
+      grid-template-columns: 13% 25% 1fr 19%;
   padding: 20px 0 7px 42px;
   text-align: left;
   border-bottom: 2px solid #ededf0;
   background-color: white;
 }
 
-.ListTasksHeader span {
+.NewTasksHeader span {
   display: inline-block;
   color: #9ca7d3;
   font-family: "Open Sans";
@@ -18,23 +18,23 @@
   line-height: 44px;
 }
 
-.ListTasksHeader span:nth-child(1) {
+.NewTasksHeader span:nth-child(1) {
   -ms-grid-column: 1;
   grid-column: 1;
 }
 
-.ListTasksHeader span:nth-child(2) {
+.NewTasksHeader span:nth-child(2) {
   -ms-grid-column: 2;
   grid-column: 2;
 }
 
-.ListTasksHeader span:nth-child(3) {
+.NewTasksHeader span:nth-child(3) {
   -ms-grid-column: 3;
   grid-column: 3;
 }
 
-.ListTasksHeader span:nth-child(4) {
+.NewTasksHeader span:nth-child(4) {
   -ms-grid-column: 4;
   grid-column: 4;
 }
-/*# sourceMappingURL=ListTasksHeader.module.css.map */
+/*# sourceMappingURL=NewTasksHeader.module.css.map */

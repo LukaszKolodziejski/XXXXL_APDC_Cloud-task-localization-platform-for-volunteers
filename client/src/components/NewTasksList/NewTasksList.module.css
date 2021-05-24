@@ -1,0 +1,25 @@
+.NewTasksList {
+  overflow: auto;
+  /* background-color: #fff; */
+  background-color: #f2f3f6;
+  /* background-color: #416ceb; */
+  /* margin: 0 20px; */
+  /* padding: 0 20px; */
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px rgb(194, 194, 194);
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(191, 189, 189);
+  border-radius: 10px;
+}

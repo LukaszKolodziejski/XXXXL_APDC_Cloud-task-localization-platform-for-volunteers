@@ -4,111 +4,175 @@
     "name": " Staci",
     "status": "AVAILABLE",
     "coins": 10,
-    "expirydate": "Tue May 25 2021 12:31:50 GMT+0100 (Brytyjski czas letni)"
+    "location": {
+      "lat": 38.70523302469377,
+      "lng": -9.193995776565858
+    },
+    "expiryDate": "Tue May 25 2021 12:31:50 GMT+0100 (Brytyjski czas letni)"
   },
   {
     "id": 2,
     "name": " Dale",
     "status": "AVAILABLE",
     "coins": 5,
-    "expirydate": "Tue May 25 2021 18:31:50 GMT+0100 (Brytyjski czas letni)"
+    "location": {
+      "lat": 38.727113705100216,
+      "lng": -9.163783384699487
+    },
+    "expiryDate": "Tue May 25 2021 18:31:50 GMT+0100 (Brytyjski czas letni)"
   },
   {
     "id": 3,
     "name": " Elsie",
     "status": "INPROGRESS",
     "coins": 7,
-    "expirydate": "Tue May 25 2021 11:31:50 GMT+0100 (Brytyjski czas letni)"
+    "location": {
+      "lat": 38.74577454371019,
+      "lng": -9.157466269077846
+    },
+    "expiryDate": "Tue May 25 2021 11:31:50 GMT+0100 (Brytyjski czas letni)"
   },
   {
     "id": 4,
     "name": " Sarajane",
     "status": "AVAILABLE",
     "coins": 8,
-    "expirydate": "Tue May 25 2021 10:31:50 GMT+0100 (Brytyjski czas letni)"
+    "location": {
+      "lat": 38.75265082417935,
+      "lng": -9.135768277317398
+    },
+    "expiryDate": "Tue May 25 2021 10:31:50 GMT+0100 (Brytyjski czas letni)"
   },
   {
     "id": 5,
     "name": " Delores",
     "status": "AVAILABLE",
     "coins": 4,
-    "expirydate": "Tue May 25 2021 19:31:50 GMT+0100 (Brytyjski czas letni)"
+    "location": {
+      "lat": 38.75053061243422,
+      "lng": -9.113795631544777
+    },
+    "expiryDate": "Tue May 25 2021 19:31:50 GMT+0100 (Brytyjski czas letni)"
   },
   {
     "id": 6,
     "name": " Willie",
     "status": "AVAILABLE",
     "coins": 11,
-    "expirydate": "Tue May 25 2021 14:31:50 GMT+0100 (Brytyjski czas letni)"
+    "location": {
+      "lat": 38.73598527664542,
+      "lng": -9.13082446318876
+    },
+    "expiryDate": "Tue May 25 2021 14:31:50 GMT+0100 (Brytyjski czas letni)"
   },
   {
     "id": 7,
     "name": " Romonda",
     "status": "DONE",
     "coins": 17,
-    "expirydate": "Tue May 25 2021 11:31:50 GMT+0100 (Brytyjski czas letni)"
+    "location": {
+      "lat": 38.77976836732519,
+      "lng": -9.194270514397063
+    },
+    "expiryDate": "Tue May 25 2021 11:31:50 GMT+0100 (Brytyjski czas letni)"
   },
   {
     "id": 8,
     "name": " Binni",
     "status": "DONE",
     "coins": 10,
-    "expirydate": "Tue May 25 2021 01:31:50 GMT+0100 (Brytyjski czas letni)"
+    "location": {
+      "lat": 38.679043821220816,
+      "lng": -9.154619207381906
+    },
+    "expiryDate": "Tue May 25 2021 01:31:50 GMT+0100 (Brytyjski czas letni)"
   },
   {
     "id": 9,
     "name": " Sheri",
     "status": "AVAILABLE",
     "coins": 9,
-    "expirydate": "Tue May 25 2021 05:31:50 GMT+0100 (Brytyjski czas letni)"
+    "location": {
+      "lat": 38.666414016632906,
+      "lng": -9.182359692183958
+    },
+    "expiryDate": "Tue May 25 2021 05:31:50 GMT+0100 (Brytyjski czas letni)"
   },
   {
     "id": 10,
     "name": " Kalie",
     "status": "AVAILABLE",
     "coins": 4,
-    "expirydate": "Tue May 25 2021 04:31:50 GMT+0100 (Brytyjski czas letni)"
+    "location": {
+      "lat": 38.66038695280173,
+      "lng": -9.171042475555602
+    },
+    "expiryDate": "Tue May 25 2021 04:31:50 GMT+0100 (Brytyjski czas letni)"
   },
   {
     "id": 11,
     "name": " Jonie",
     "status": "AVAILABLE",
     "coins": 6,
-    "expirydate": "Tue May 25 2021 22:31:50 GMT+0100 (Brytyjski czas letni)"
+    "location": {
+      "lat": 38.699217323807815,
+      "lng": -9.199332289336759
+    },
+    "expiryDate": "Tue May 25 2021 22:31:50 GMT+0100 (Brytyjski czas letni)"
   },
   {
     "id": 12,
     "name": " Jannel",
     "status": "AVAILABLE",
     "coins": 11,
-    "expirydate": "Tue May 25 2021 11:31:50 GMT+0100 (Brytyjski czas letni)"
+    "location": {
+      "lat": 38.7144566008166,
+      "lng": -9.127646512989465
+    },
+    "expiryDate": "Tue May 25 2021 11:31:50 GMT+0100 (Brytyjski czas letni)"
   },
   {
     "id": 13,
     "name": " Codee",
     "status": "AVAILABLE",
     "coins": 14,
-    "expirydate": "Tue May 25 2021 17:31:50 GMT+0100 (Brytyjski czas letni)"
+    "location": {
+      "lat": 38.72455013907292,
+      "lng": -9.116934849354017
+    },
+    "expiryDate": "Tue May 25 2021 17:31:50 GMT+0100 (Brytyjski czas letni)"
   },
   {
     "id": 14,
     "name": " Ainslie",
     "status": "AVAILABLE",
     "coins": 19,
-    "expirydate": "Tue May 25 2021 13:31:50 GMT+0100 (Brytyjski czas letni)"
+    "location": {
+      "lat": 38.72907159645184,
+      "lng": -9.138907516081396
+    },
+    "expiryDate": "Tue May 25 2021 13:31:50 GMT+0100 (Brytyjski czas letni)"
   },
   {
     "id": 15,
     "name": " Caril",
     "status": "AVAILABLE",
     "coins": 10,
-    "expirydate": "Tue May 25 2021 19:31:50 GMT+0100 (Brytyjski czas letni)"
+    "location": {
+      "lat": 38.732628630541164,
+      "lng": -9.21230992715298
+    },
+    "expiryDate": "Tue May 25 2021 19:31:50 GMT+0100 (Brytyjski czas letni)"
   },
   {
     "id": 16,
     "name": " Dulcea",
     "status": "AVAILABLE",
     "coins": 5,
-    "expirydate": "Tue May 25 2021 01:31:50 GMT+0100 (Brytyjski czas letni)"
+    "location": {
+      "lat": 38.71647239981142,
+      "lng": -9.153636187762281
+    },
+    "expiryDate": "Tue May 25 2021 01:31:50 GMT+0100 (Brytyjski czas letni)"
   }
 ]

@@ -7,7 +7,7 @@ const ListServersHeader = (props) => {
       <span>CREATOR</span>
       <span>TASK STATUS</span>
       <span>EXPIRY DATE</span>
-      <span>COINS</span>
+      <span>COINS TO EARN</span>
     </p>
   );
 };
