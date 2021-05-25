@@ -1,25 +1,9 @@
-.ListTasksHeader {
+.TopHeader {
   display: grid;
-  grid-template-columns: 20% 25% 1fr 25%;
-  padding: 20px 0 7px 42px;
   text-align: left;
-  // text-align: center;
   border-bottom: 2px solid #ededf0;
-  // z-index: 2;
-  // position: absolute;
-  // top: 0;
-  // left: 0;
-  // width: 100%;
-  // background-color: rgb(233, 28, 28);
   background-color: rgb(255, 255, 255);
 
-  // @media (min-width: 800px) {
-  //   grid-template-columns: 35% 25%;
-  // }
-  // @media (min-width: 1200px) {
-  //   // grid-template-columns: 27.1% 25%;
-  //   grid-template-columns: 27.1% 25%;
-  // }
   span {
     display: inline-block;
     color: #9ca7d3;
@@ -40,4 +24,19 @@
       grid-column: 4;
     }
   }
+}
+
+.ListTasks {
+  grid-template-columns: 20% 25% 1fr 25%;
+  padding: 20px 0 7px 42px;
+}
+
+.NewTasks {
+  grid-template-columns: 13% 25% 1fr 19%;
+  padding: 20px 0 7px 42px;
+}
+
+.Ranking {
+  grid-template-columns: 11% 20% 1fr 22% 27%;
+  padding: 20px 0 7px 32px;
 }
