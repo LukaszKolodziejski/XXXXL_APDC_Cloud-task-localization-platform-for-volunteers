@@ -27,8 +27,8 @@ const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.ACCOUNTS:
       return accounts(state, action);
-    case actionTypes.DELETE_ACCOUNTS:
-      return deleteAccount(state, action);
+    // case actionTypes.DELETE_ACCOUNTS:
+    // return deleteAccount(state, action);
     case actionTypes.CHANGE_ACCOUNTS_ATTRIBUTES:
       return changeAccountsAttributes(state, action);
     default:
