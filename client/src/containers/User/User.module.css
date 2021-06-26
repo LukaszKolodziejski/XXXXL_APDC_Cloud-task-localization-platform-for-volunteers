@@ -1,0 +1,32 @@
+.UserData {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  margin: 3% auto;
+  width: 80%;
+  text-align: center;
+  border: 2px solid #a26509;
+  padding: 20px;
+  border-radius: 15px;
+  -webkit-box-shadow: 2px 5px 10px #000;
+  box-shadow: 2px 5px 10px #000;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.UserData:hover {
+  -webkit-box-shadow: 2px 5px 15px #000;
+  box-shadow: 2px 5px 15px #000;
+}
+
+@media (min-width: 600px) {
+  .UserData {
+    width: 500px;
+  }
+}
