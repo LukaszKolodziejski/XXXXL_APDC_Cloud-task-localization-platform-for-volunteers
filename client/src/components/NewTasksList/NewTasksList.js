@@ -2,12 +2,30 @@ import React from "react";
 import styles from "./NewTasksList.module.css";
 import NewSingleTask from "./NewSingleTask/NewSingleTask";
 import TopHeader from "../UX/TopHeader/TopHeader";
+import { useDispatch } from "react-redux";
+import * as actionCreators from "../../store/actions/index";
 
 const NewTasksList = (props) => {
-  const addTask = () => {
+  const dispatch = useDispatch();
+
+  const onSaveTasksList = (tasksList) =>
+    dispatch(actionCreators.saveTasksList(tasksList));
+
+  const saveTasksHandler = () => {
     const date = new Date();
-    date.setDate(date.getDate() + 2);
-    console.log(date);
+    date.setDate(date.getDate() + 7);
+    const savedTasksList = {
+      creatorId: "-MXviEpTOOJMNC5QLaiN",
+      name: "Staci",
+      status: "AVAILABLE",
+      coins: props.newTasksList.length,
+      data: props.newTasksList,
+      expiryDate: date,
+      playerName: "",
+      playerId: "",
+      completedTasks: 0,
+    };
+    onSaveTasksList(savedTasksList);
   };
 
   const headerNames = ["# Number", "LOCATION", "DESCRIPTION", "COINS"];
@@ -28,6 +46,11 @@ const NewTasksList = (props) => {
     <section className={styles.NewTasksList}>
       <TopHeader styles="NewTasks" names={headerNames} />
       <div>{listOfTasks}</div>
+      {listOfTasks.length ? (
+        <button className={styles.SaveBtn} onClick={saveTasksHandler}>
+          Save new tasks
+        </button>
+      ) : null}
     </section>
   );
 };
