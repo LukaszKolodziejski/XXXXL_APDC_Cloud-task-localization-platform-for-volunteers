@@ -2,9 +2,11 @@
   overflow: auto;
   /* background-color: #fff; */
   background-color: #f2f3f6;
+  height: 90%;
   /* background-color: #416ceb; */
   /* margin: 0 20px; */
   /* padding: 0 20px; */
+  /* position: relative; */
 }
 
 /* width */
@@ -22,4 +24,21 @@
 ::-webkit-scrollbar-thumb {
   background: rgb(191, 189, 189);
   border-radius: 10px;
+}
+
+.SaveBtn {
+  position: fixed;
+  text-align: center;
+  background-color: rgb(167, 114, 45);
+  color: rgb(252, 247, 247);
+  bottom: 0;
+  left: 25%;
+  transform: translateX(-50%);
+  margin: 20px 0;
+  padding: 10px 13px;
+  z-index: 100;
+  font-weight: bold;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 16px;
 }
