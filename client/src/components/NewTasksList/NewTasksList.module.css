@@ -25,3 +25,15 @@
   background: rgb(191, 189, 189);
   border-radius: 10px;
 }
+
+.Info {
+  background-color: rgb(245, 239, 239);
+  border: 1px solid rgb(159, 107, 11);
+  border-radius: 10px;
+  padding: 30px 30px;
+  top: 40%;
+  position: fixed;
+  left: 25%;
+  transform: translateX(-50%);
+  font-size: 18px;
+}
