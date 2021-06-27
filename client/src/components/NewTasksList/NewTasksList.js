@@ -17,9 +17,15 @@ const NewTasksList = (props) => {
     />
   ));
 
+  const Info =
+    listOfTasks.length === 0 ? (
+      <div className={styles.Info}>Click on the map to add tasks.</div>
+    ) : null;
+
   return (
     <section className={styles.NewTasksList}>
       <TopHeader styles="NewTasks" names={headerNames} />
+      {Info}
       <div>{listOfTasks}</div>
       {listOfTasks.length ? props.children : null}
     </section>

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Redirect } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import * as actionCreators from "../../store/actions/index";
 import styles from "./NewTasksMap.module.css";
@@ -7,6 +8,7 @@ import NewTasksList from "../../components/NewTasksList/NewTasksList";
 
 const NewTasksMap = (props) => {
   const [newTasksList, setNewTasksList] = useState([]);
+  const [isSaved, setIsSaved] = useState(false);
   const { userId } = useSelector((state) => state.auth);
   const { accounts } = useSelector((state) => state.account);
   const [creatorName, setCreatorName] = useState("");
@@ -55,7 +57,7 @@ const NewTasksMap = (props) => {
     ]);
   };
 
-  const saveTasksHandler = () => {
+  const saveTasksHandler = async () => {
     const date = new Date();
     date.setDate(date.getDate() + 7);
     const savedTasksList = {
@@ -69,8 +71,11 @@ const NewTasksMap = (props) => {
       playerId: "",
       completedTasks: 0,
     };
-    onSaveTasksList(savedTasksList);
+    await onSaveTasksList(savedTasksList);
+    await setIsSaved(true);
   };
+
+  if (isSaved) return <Redirect to="/" />;
 
   return (
     <div className={styles.NewTasksMap}>

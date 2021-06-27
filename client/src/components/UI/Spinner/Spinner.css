@@ -33,7 +33,8 @@
 }
 
 .Spinner:after {
-  background: rgb(255, 255, 255);
+  /* background: rgb(255, 255, 255); */
+  background: #f2f3f6;
   width: 75%;
   height: 75%;
   border-radius: 50%;
