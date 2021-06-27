@@ -24,48 +24,47 @@ export const accounts = (token) => (dispatch) => {
   }
 };
 
-export const changeAccountsAttributes = (accounts, id, state, role) => (
-  dispatch
-) => {
-  const convertArrayToObject = (array, key) => {
-    const initialValue = {};
-    return array.reduce((obj, item) => {
-      return {
-        ...obj,
-        [item[key]]: item,
-      };
-    }, initialValue);
-  };
+export const changeAccountsAttributes =
+  (accounts, id, state, role) => (dispatch) => {
+    const convertArrayToObject = (array, key) => {
+      const initialValue = {};
+      return array.reduce((obj, item) => {
+        return {
+          ...obj,
+          [item[key]]: item,
+        };
+      }, initialValue);
+    };
 
-  const newAccounts = convertArrayToObject(accounts, "id");
+    const newAccounts = convertArrayToObject(accounts, "id");
 
-  const newAccountsData = {
-    ...newAccounts,
-    [id]: {
-      ...newAccounts[id],
-      state,
-      role,
-    },
-  };
+    const newAccountsData = {
+      ...newAccounts,
+      [id]: {
+        ...newAccounts[id],
+        state,
+        role,
+      },
+    };
 
-  // dispatch({
-  //   type: actionTypes.CHANGE_ACCOUNTS_ATTRIBUTES,
-  //   accounts,
-  //   loadingAccounts: false,
-  // });
+    // dispatch({
+    //   type: actionTypes.CHANGE_ACCOUNTS_ATTRIBUTES,
+    //   accounts,
+    //   loadingAccounts: false,
+    // });
 
-  axios.put(`/accounts.json`, newAccountsData).then((res) => {
-    const accounts = [];
-    for (let key in res.data) {
-      accounts.push({ ...res.data[key], id: key });
-    }
-    dispatch({
-      type: actionTypes.CHANGE_ACCOUNTS_ATTRIBUTES,
-      accounts,
-      loadingAccounts: false,
+    axios.put(`/accounts.json`, newAccountsData).then((res) => {
+      const accounts = [];
+      for (let key in res.data) {
+        accounts.push({ ...res.data[key], id: key });
+      }
+      dispatch({
+        type: actionTypes.CHANGE_ACCOUNTS_ATTRIBUTES,
+        accounts,
+        loadingAccounts: false,
+      });
     });
-  });
-};
+  };
 
 export const deleteAccount = (accounts, id) => (dispatch) => {
   const convertArrayToObject = (array, key) => {

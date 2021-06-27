@@ -17,6 +17,7 @@ const App = () => {
         <Route path="/new-task" component={NewTasksMap} />
         <Route path="/login" exact component={Auth} />
         <Route path="/user" component={User} />
+        {/* <Route path="/account" component={Accounts} /> */}
         <Route path="/accounts" component={Accounts} />
       </Layout>
     </Router>

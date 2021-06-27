@@ -2,17 +2,10 @@ import React from "react";
 import styles from "./RankingList.module.css";
 import RankingSingleUser from "./RankingSingleUser/RankingSingleUser";
 import TopHeader from "../UX/TopHeader/TopHeader";
-import users from "./users.json";
+// import users from "./users.json";
 
 const RankingList = (props) => {
-  const addTask = () => {
-    const date = new Date();
-    date.setDate(date.getDate() + 2);
-    console.log(date);
-  };
-
-  const sortUser = users.sort((a, b) => (a.coins < b.coins && 1) || -1);
-  console.log(sortUser);
+  const sortUsers = props.users.sort((a, b) => (a.coins < b.coins && 1) || -1);
 
   const headerNames = [
     "# RANK",
@@ -22,15 +15,15 @@ const RankingList = (props) => {
     "COMPLETED ROUND",
   ];
 
-  const listOfTasks = users.map((task, numer) => (
+  const listOfTasks = sortUsers.map((user, numer) => (
     <RankingSingleUser
-      key={task.id}
-      id={task.id}
+      key={user.id}
+      id={user.id}
       place={numer + 1}
-      name={task.name}
-      status={task.status}
-      tasks={task.tasks}
-      coins={task.coins}
+      name={user.publicUserId}
+      status={user.status}
+      tasks={user.tasks}
+      coins={user.coins}
     />
   ));
 

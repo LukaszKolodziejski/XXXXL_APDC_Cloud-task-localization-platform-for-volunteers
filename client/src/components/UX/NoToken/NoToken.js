@@ -1,6 +1,6 @@
 import React, { Fragment, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
-import styles from "./Accounts.module.css";
+import styles from "./NoToken.module.css";
 import gsap from "gsap";
 
 const NoToken = (props) => {
@@ -15,8 +15,8 @@ const NoToken = (props) => {
   return (
     <Fragment>
       <div ref={wrapper}>
-        <Link to="/" className={styles.Token}>
-          Authenticate to see all accounts.
+        <Link to="/login" className={styles.Token}>
+          {props.text}
         </Link>
       </div>
     </Fragment>
