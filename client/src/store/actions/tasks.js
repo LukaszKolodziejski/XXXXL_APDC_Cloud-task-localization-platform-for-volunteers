@@ -2,6 +2,10 @@ import * as actionTypes from "./actionTypes";
 import axios from "../../axios-data";
 
 export const tasksList = () => (dispatch) => {
+  dispatch({
+    type: actionTypes.TASKS_LIST_START,
+    loadingTasks: true,
+  });
   axios.get(`/tasks.json`).then((res) => {
     const tasks = [];
     for (let key in res.data) {
@@ -15,19 +19,19 @@ export const tasksList = () => (dispatch) => {
   });
 };
 
-export const saveTasksList = (tasks) => (dispatch) => {
+export const saveTasksList = (tasks) => async (dispatch) => {
   //   axios.put(`/tasks.json`, tasks).then((res) => {
+  dispatch({
+    type: actionTypes.TASKS_LIST_START,
+    loadingTasks: true,
+  });
+
   axios.post(`/tasks.json`, tasks).then((res) => {
-    const newTasks = [];
-    for (let key in res.data) {
-      newTasks.push({ ...res.data[key], id: key });
-    }
-    console.log("redux savedTasksList");
-    console.log(newTasks);
     dispatch({
       type: actionTypes.SAVE_TASKS_LIST,
-      tasks: newTasks,
+      currentTasks: res.data,
       loadingTasks: false,
     });
+    dispatch(tasksList());
   });
 };
