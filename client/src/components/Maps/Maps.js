@@ -32,7 +32,8 @@ const MyMapComponent = compose(
 
   useEffect(() => {
     const fetchMerkersList = props.tasks.map((task) => {
-      const { lat, lng } = task.location;
+      // const { lat, lng } = task.location;
+      const { lat, lng } = task.data[0].location;
       if (task.id === activeDataList) wrapper.current.panTo({ lat, lng });
 
       let coin = task.id === activeDataList ? CoinGold32 : CoinGold24;
