@@ -8,6 +8,12 @@ import WrapperAuth from "./WrapperAuth";
 import { connect } from "react-redux";
 import * as actionCreators from "../../store/actions/index";
 
+// >>> each e-mail: && each password <<<
+// only change 4 > 5 > 6 > ...
+/*
+student.5@pt.unl
+FctAPDC-user_5
+*/
 class Auth extends Component {
   state = {
     controls: {
@@ -87,7 +93,8 @@ class Auth extends Component {
     }
 
     if (rules.isEmail) {
-      const pattern = /[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\.)+[a-zA-Z0-9](?:[a-z0-9-]*[a-zA-Z0-9])?/;
+      const pattern =
+        /[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\.)+[a-zA-Z0-9](?:[a-z0-9-]*[a-zA-Z0-9])?/;
       isValid = pattern.test(value) && isValid;
     }
     return isValid;
