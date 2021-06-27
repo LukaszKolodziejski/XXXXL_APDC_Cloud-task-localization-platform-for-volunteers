@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import styles from "./Accounts.module.css";
 import ListAccounts from "../../components/ListAccounts/ListAccounts";
 import Spinner from "../../components/UI/Spinner/Spinner";
-import NoToken from "./NoToken";
+import NoToken from "../../components/UX/NoToken/NoToken";
 import * as actionCreators from "../../store/actions/index";
 import { connect } from "react-redux";
 
@@ -16,13 +16,14 @@ class Accounts extends Component {
   render() {
     let allAccounts;
     const { accounts, userId, loading, idToken, loadingAccounts } = this.props;
+    const noTokenText = "Authenticate to see all accounts.";
 
     if (loadingAccounts && idToken) {
       allAccounts = <Spinner />;
     } else if (loadingAccounts && !idToken) {
-      allAccounts = <NoToken />;
+      allAccounts = <NoToken text={noTokenText} />;
     } else if (!loadingAccounts && !idToken) {
-      allAccounts = <NoToken />;
+      allAccounts = <NoToken text={noTokenText} />;
     } else if (!loadingAccounts && idToken) {
       allAccounts = <ListAccounts accounts={accounts} userId={userId} />;
     }
