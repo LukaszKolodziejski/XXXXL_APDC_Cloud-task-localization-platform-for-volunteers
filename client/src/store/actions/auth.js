@@ -8,6 +8,7 @@ export const logout = () => (dispatch) => {
   localStorage.removeItem("userId");
   dispatch(actions.accounts(null));
   dispatch({ type: actionTypes.AUTH_LOGOUT });
+  //TODO: fn() to change Status to "OFFLINE"
 };
 
 // export const logout = () => {
