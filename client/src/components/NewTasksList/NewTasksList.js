@@ -11,6 +11,11 @@ const NewTasksList = (props) => {
   const onSaveTasksList = (tasksList) =>
     dispatch(actionCreators.saveTasksList(tasksList));
 
+  //TODO: przenieść logike i BTN do NewTasksMap
+  //TODO: creatorId >> to obecnie zalogowany
+  //TODO: creatorId & 'name' dla wszystkich >> zmienić w firebase jak tast.json
+  //TODO: New TASK widoczne tylko jak jestem zalogowany
+
   const saveTasksHandler = () => {
     const date = new Date();
     date.setDate(date.getDate() + 7);
