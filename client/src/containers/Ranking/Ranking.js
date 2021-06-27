@@ -14,8 +14,6 @@ class Ranking extends Component {
     const { accounts, idToken, userId, loadingAccounts } = this.props;
     const noTokenText = "Authenticate to see full ranking.";
 
-    console.log(userId);
-
     if (loadingAccounts && idToken) {
       ranking = <Spinner />;
     } else if (loadingAccounts && !idToken) {
