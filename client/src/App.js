@@ -5,6 +5,7 @@ import TasksMap from "./containers/TasksMap/TasksMap";
 import Ranking from "./containers/Ranking/Ranking";
 import NewTasksMap from "./containers/NewTasksMap/NewTasksMap";
 import Auth from "./containers/Auth/Auth";
+import Logout from "./containers/Logout/Logout";
 import User from "./containers/User/User";
 import Accounts from "./containers/Accounts/Accounts";
 
@@ -16,6 +17,7 @@ const App = () => {
         <Route path="/ranking" component={Ranking} />
         <Route path="/new-task" component={NewTasksMap} />
         <Route path="/login" exact component={Auth} />
+        <Route path="/logout" exact component={Logout} />
         <Route path="/user" component={User} />
         {/* <Route path="/account" component={Accounts} /> */}
         <Route path="/accounts" component={Accounts} />

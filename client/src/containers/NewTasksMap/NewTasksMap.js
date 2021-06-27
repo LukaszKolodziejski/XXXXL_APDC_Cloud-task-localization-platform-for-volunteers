@@ -1,16 +1,35 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import * as actionCreators from "../../store/actions/index";
 import styles from "./NewTasksMap.module.css";
 import CreateMapTasks from "../../components/Maps/CreateMapTasks";
 import NewTasksList from "../../components/NewTasksList/NewTasksList";
 
 const NewTasksMap = (props) => {
   const [newTasksList, setNewTasksList] = useState([]);
-  const [newTask, setNewTask] = useState({
-    id: 0,
-    location: {},
-    description: "",
-    coins: 1,
-  });
+  const { userId } = useSelector((state) => state.auth);
+  const { accounts } = useSelector((state) => state.account);
+  const [creatorName, setCreatorName] = useState("");
+
+  const dispatch = useDispatch();
+
+  const onSaveTasksList = (tasksList) =>
+    dispatch(actionCreators.saveTasksList(tasksList));
+
+  const onAuthCheckState = () => dispatch(actionCreators.authCheckState());
+
+  useEffect(() => {
+    onAuthCheckState();
+  }, []);
+
+  useEffect(() => {
+    if (accounts.length) {
+      const name = accounts.find(
+        (account) => account.userId === userId
+      ).publicUserId;
+      setCreatorName(name);
+    }
+  }, [accounts]);
 
   const descriptionHandler = (id, description) => {
     const updateList = newTasksList.map((task) => ({
@@ -36,12 +55,33 @@ const NewTasksMap = (props) => {
     ]);
   };
 
+  const saveTasksHandler = () => {
+    const date = new Date();
+    date.setDate(date.getDate() + 7);
+    const savedTasksList = {
+      creatorId: userId,
+      name: creatorName,
+      status: "AVAILABLE",
+      coins: newTasksList.length,
+      data: newTasksList,
+      expiryDate: date,
+      playerName: "",
+      playerId: "",
+      completedTasks: 0,
+    };
+    onSaveTasksList(savedTasksList);
+  };
+
   return (
     <div className={styles.NewTasksMap}>
       <NewTasksList
         newTasksList={newTasksList}
         descriptionHandler={descriptionHandler}
-      />
+      >
+        <button className={styles.SaveBtn} onClick={saveTasksHandler}>
+          Save new tasks
+        </button>
+      </NewTasksList>
       <CreateMapTasks onClickLocation={locationHandler} />
     </div>
   );

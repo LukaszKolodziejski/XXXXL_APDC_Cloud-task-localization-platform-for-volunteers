@@ -11,7 +11,7 @@ const NavigationItem = (props) => {
           to={props.link}
           exact={props.exact}
         >
-          {props.children}
+          {props.text}
         </NavLink>
       </li>
     </div>

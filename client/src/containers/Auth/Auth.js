@@ -191,7 +191,7 @@ class Auth extends Component {
               </Button>
             </WrapperAuth>
             {this.props.idToken && !isSignup ? (
-              <Redirect to="/accounts" />
+              <Redirect to="/" />
             ) : this.props.idToken ? (
               <Redirect to="/user" />
             ) : null}
