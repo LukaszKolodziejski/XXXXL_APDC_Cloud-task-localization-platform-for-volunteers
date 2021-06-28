@@ -28,6 +28,7 @@ const TasksList = (props) => {
       expiryDate={task.expiryDate}
       coins={task.coins}
       onActiveDataList={props.onActiveDataList}
+      onTasksHandler={props.onTasksHandler}
     />
   ));
 

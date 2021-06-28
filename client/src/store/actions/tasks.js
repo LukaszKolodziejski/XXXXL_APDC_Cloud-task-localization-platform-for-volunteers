@@ -19,7 +19,7 @@ export const tasksList = () => (dispatch) => {
   });
 };
 
-export const saveTasksList = (tasks) => async (dispatch) => {
+export const saveTasksList = (tasks) => (dispatch) => {
   //   axios.put(`/tasks.json`, tasks).then((res) => {
   dispatch({
     type: actionTypes.TASKS_LIST_START,
@@ -33,5 +33,12 @@ export const saveTasksList = (tasks) => async (dispatch) => {
       loadingTasks: false,
     });
     dispatch(tasksList());
+  });
+};
+
+export const setCurrentTasks = (currentTasks) => (dispatch) => {
+  dispatch({
+    type: actionTypes.SET_CURRENT_TASKS,
+    currentTasks,
   });
 };

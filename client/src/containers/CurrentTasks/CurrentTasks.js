@@ -2,14 +2,16 @@ import React, { useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import * as actionCreators from "../../store/actions/index";
-import styles from "./NewTasksMap.module.css";
-import CreateMapTasks from "../../components/Maps/CreateMapTasks";
-import NewTasksList from "../../components/NewTasksList/NewTasksList";
+import styles from "./CurrentTasks.module.css";
+import CurrentTasksMaps from "../../components/Maps/CurrentTasksMaps";
+import CurrentTasksList from "../../components/CurrentTasksList/CurrentTasksList";
 
-const NewTasksMap = (props) => {
+const CurrentTasks = (props) => {
+  const [activeDataList, setActiveDataList] = useState(0);
   const [newTasksList, setNewTasksList] = useState([]);
   const [isSaved, setIsSaved] = useState(false);
   const { userId } = useSelector((state) => state.auth);
+  const { tasks, currentTasks } = useSelector((state) => state.tasks);
   const { accounts } = useSelector((state) => state.account);
   const [creatorName, setCreatorName] = useState("");
 
@@ -19,9 +21,11 @@ const NewTasksMap = (props) => {
     dispatch(actionCreators.saveTasksList(tasksList));
 
   const onAuthCheckState = () => dispatch(actionCreators.authCheckState());
+  const onTasksList = () => dispatch(actionCreators.tasksList());
 
   useEffect(() => {
     onAuthCheckState();
+    onTasksList();
   }, []);
 
   useEffect(() => {
@@ -32,30 +36,6 @@ const NewTasksMap = (props) => {
       setCreatorName(name);
     }
   }, [accounts]);
-
-  const descriptionHandler = (id, description) => {
-    const updateList = newTasksList.map((task) => ({
-      id: task.id,
-      location: task.location,
-      description: task.id === id ? description : task.description,
-      coins: task.coins,
-    }));
-    setNewTasksList(updateList);
-  };
-
-  const locationHandler = (markerId, latLng) => {
-    // console.log(latLng.lat());
-    // console.log(latLng.lng());
-    setNewTasksList((prevStates) => [
-      ...prevStates,
-      {
-        id: markerId,
-        location: latLng,
-        description: "",
-        coins: 1,
-      },
-    ]);
-  };
 
   const saveTasksHandler = async () => {
     const date = new Date();
@@ -77,19 +57,23 @@ const NewTasksMap = (props) => {
 
   if (isSaved) return <Redirect to="/" />;
 
+  const findCurrentTasks = () => tasks.find((task) => task.id === currentTasks);
+
   return (
-    <div className={styles.NewTasksMap}>
-      <NewTasksList
-        newTasksList={newTasksList}
-        descriptionHandler={descriptionHandler}
+    <div className={styles.CurrentTasks}>
+      <CurrentTasksList
+        newTasksList={findCurrentTasks().data}
+        onActiveDataList={setActiveDataList}
       >
-        <button className={styles.SaveBtn} onClick={saveTasksHandler}>
-          Save new tasks
-        </button>
-      </NewTasksList>
-      <CreateMapTasks onClickLocation={locationHandler} />
+        {/* <button className={styles.SaveBtn} onClick={saveTasksHandler}> */}
+        <button className={styles.SaveBtn}>Start to get Coins !!!</button>
+      </CurrentTasksList>
+      <CurrentTasksMaps
+        tasks={findCurrentTasks()}
+        activeDataList={activeDataList}
+      />
     </div>
   );
 };
 
-export default NewTasksMap;
+export default CurrentTasks;

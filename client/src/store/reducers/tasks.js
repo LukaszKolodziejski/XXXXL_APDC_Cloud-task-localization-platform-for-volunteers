@@ -23,6 +23,11 @@ const saveTasksList = (state, action) => ({
   loadingTasks: action.loadingTasks,
 });
 
+const setCurrentTasks = (state, action) => ({
+  ...state,
+  currentTasks: action.currentTasks,
+});
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.TASKS_LIST:
@@ -31,6 +36,8 @@ const reducer = (state = initialState, action) => {
       return tasksListStart(state, action);
     case actionTypes.SAVE_TASKS_LIST:
       return saveTasksList(state, action);
+    case actionTypes.SET_CURRENT_TASKS:
+      return setCurrentTasks(state, action);
     default:
       return state;
   }
