@@ -8,4 +8,4 @@ export {
   checkAuthTimeout,
 } from "./auth";
 export { accounts, changeAccountsAttributes, deleteAccount } from "./accounts";
-export { tasksList, saveTasksList } from "./tasks";
+export { tasksList, saveTasksList, setCurrentTasks } from "./tasks";
