@@ -14,20 +14,38 @@ const TasksMap = (props) => {
   const dispatch = useDispatch();
   const onAuthCheckState = () => dispatch(actionCreators.authCheckState());
   const onTasksList = () => dispatch(actionCreators.tasksList());
-  // TODO: przekierowanie na Comp. pokazujący to zadanie
-  // TODO: zmiana stanów zadania, jak ktoś zacznie
-  // TODO: >> zadanie może wykonać ktoś inny i odznaczać
+  const onSetCurrentTasks = (currentTasks) =>
+    dispatch(actionCreators.setCurrentTasks(currentTasks));
+
+  // TODO: >> Jak ktoś się zaloguje: Offline > Online
+  // TODO: >> Jak ktoś się wyloguje: Online > Offline
+  // TODO: >> zadanie może wykonać ktoś inny
+
+  // TODO: >> Start do Task: Getting Coins
+  // TODO: >> Start do Task: Task have PLAYER
+
+  // TODO: >> End do Task: Owner must confirm
+  // TODO: >> End do Task: Online + Coiny + Complited Tasks
+
+  // TODO: >> Start do Task: Task in Progress
+  // TODO: >> End do Task: Task in Done / to confirm
 
   useEffect(() => {
     onTasksList();
     onAuthCheckState();
   }, []);
 
+  // const tasksHandler = (currentTasks) => onSetCurrentTasks(currentTasks);
+
   if (loadingTasks || tasks.length === 0) return <Spinner />;
   console.log(tasks);
   return (
     <div className={styles.TasksMap}>
-      <TasksList tasks={tasks} onActiveDataList={setActiveDataList} />
+      <TasksList
+        tasks={tasks}
+        onTasksHandler={onSetCurrentTasks}
+        onActiveDataList={setActiveDataList}
+      />
       <Maps tasks={tasks} activeDataList={activeDataList} />
     </div>
   );
