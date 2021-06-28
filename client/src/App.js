@@ -4,6 +4,7 @@ import Layout from "./hoc/Layout/Layout";
 import TasksMap from "./containers/TasksMap/TasksMap";
 import Ranking from "./containers/Ranking/Ranking";
 import NewTasksMap from "./containers/NewTasksMap/NewTasksMap";
+import CurrentTasks from "./containers/CurrentTasks/CurrentTasks";
 import Auth from "./containers/Auth/Auth";
 import Logout from "./containers/Logout/Logout";
 import User from "./containers/User/User";
@@ -19,6 +20,7 @@ const App = () => {
         <Route path="/login" exact component={Auth} />
         <Route path="/logout" exact component={Logout} />
         <Route path="/user" component={User} />
+        <Route path="/current-tasks" component={CurrentTasks} />
         {/* <Route path="/account" component={Accounts} /> */}
         <Route path="/accounts" component={Accounts} />
       </Layout>
