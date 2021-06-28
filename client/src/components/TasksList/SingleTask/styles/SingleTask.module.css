@@ -27,6 +27,7 @@
   background-color: #fff;
   margin: 7px 12px;
   border-radius: 5px;
+  cursor: pointer;
 }
 
 .SingleTask:hover {
