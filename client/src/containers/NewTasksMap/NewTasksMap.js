@@ -71,8 +71,8 @@ const NewTasksMap = (props) => {
       playerId: "",
       completedTasks: 0,
     };
-    await onSaveTasksList(savedTasksList);
-    await setIsSaved(true);
+    onSaveTasksList(savedTasksList);
+    setIsSaved(true);
   };
 
   if (isSaved) return <Redirect to="/" />;
