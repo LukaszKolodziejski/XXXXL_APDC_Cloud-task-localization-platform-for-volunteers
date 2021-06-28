@@ -1,6 +1,7 @@
 import * as actionTypes from "./actionTypes";
 import * as actions from "./index";
 import axios from "../../axios-data";
+import axiosApi from "../../axios-api";
 
 export const accounts = (token) => (dispatch) => {
   if (token) {

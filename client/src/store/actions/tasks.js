@@ -1,12 +1,13 @@
 import * as actionTypes from "./actionTypes";
 import axios from "../../axios-data";
+import axiosApi from "../../axios-api";
 
 export const tasksList = () => (dispatch) => {
   dispatch({
     type: actionTypes.TASKS_LIST_START,
     loadingTasks: true,
   });
-  axios.get(`/tasks.json`).then((res) => {
+  axiosApi.get(`/tasks`).then((res) => {
     const tasks = [];
     for (let key in res.data) {
       tasks.push({ ...res.data[key], id: key });
@@ -18,6 +19,24 @@ export const tasksList = () => (dispatch) => {
     });
   });
 };
+
+// export const tasksList = () => (dispatch) => {
+//   dispatch({
+//     type: actionTypes.TASKS_LIST_START,
+//     loadingTasks: true,
+//   });
+//   axios.get(`/tasks.json`).then((res) => {
+//     const tasks = [];
+//     for (let key in res.data) {
+//       tasks.push({ ...res.data[key], id: key });
+//     }
+//     dispatch({
+//       type: actionTypes.TASKS_LIST,
+//       tasks,
+//       loadingTasks: false,
+//     });
+//   });
+// };
 
 export const saveTasksList = (tasks) => (dispatch) => {
   //   axios.put(`/tasks.json`, tasks).then((res) => {
