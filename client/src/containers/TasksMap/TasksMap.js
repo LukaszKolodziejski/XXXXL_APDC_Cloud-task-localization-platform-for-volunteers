@@ -38,7 +38,6 @@ const TasksMap = (props) => {
   // const tasksHandler = (currentTasks) => onSetCurrentTasks(currentTasks);
 
   if (loadingTasks || tasks.length === 0) return <Spinner />;
-  console.log(tasks);
   return (
     <div className={styles.TasksMap}>
       <TasksList

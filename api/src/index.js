@@ -1,8 +1,9 @@
-const express = require("express");
+import express from "express";
+import request from "request";
+import * as dataStorage from "./dataStorage/dataStorage";
+import saveDataRecovery from "./dataStorage/dataRecovery/saveDataRecovery";
 const app = express();
 const PORT = 8080;
-const tasks = require("./tasks.json");
-const users = require("./users.json");
 const ONLINE = "ONLINE";
 const OFFLINE = "OFFLINE";
 const GETTING_COINS = "GETTING_COINS";
@@ -11,7 +12,9 @@ const INPROGRESS = "INPROGRESS";
 const DONE = "DONE";
 
 app.use(function (req, res, next) {
+  //TODO: change Origin before deploy
   res.header("Access-Control-Allow-Origin", "*");
+  // res.header("Access-Control-Allow-Origin", "http://localhost:3000");
   res.header(
     "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept"
@@ -21,64 +24,75 @@ app.use(function (req, res, next) {
 });
 
 app.get("/tasks", (req, res) => {
-  res.send(tasks);
+  request(dataStorage.tasks, (error, response, data) => {
+    console.error("error:", error); // Print the error if one occurred
+    console.log("statusCode:", response && response.statusCode); // Print the response status code if a response was received
+    res.send(data);
+    // saveDataRecovery(data, `tasksRecovery.json`);
+  });
 });
 
-app.get("/users", (req, res) => {
-  res.send(users);
+app.get("/accounts", (req, res) => {
+  request(dataStorage.accounts, (error, response, data) => {
+    console.error("error:", error); // Print the error if one occurred
+    console.log("statusCode:", response && response.statusCode); // Print the response status code if a response was received
+    res.send(data);
+    saveDataRecovery(data, `accountsRecovery.json`);
+  });
+  res.send(data);
 });
 
 app.get("/tasks/:taskId", (req, res) => {
-  const foundServer = findServer(req, res);
+  const foundTask = findTask(req, res);
 
-  res.send(foundServer);
+  res.send(foundTask);
 });
 
 app.put("/tasks/:taskId/on", (req, res) => {
-  const foundServer = findServer(req, res);
+  const foundTask = findTask(req, res);
 
-  if (foundServer.status !== OFFLINE) {
+  if (foundTask.status !== OFFLINE) {
     return res.status(400).send({ errorMessage: `Task is not offline` });
   }
 
-  foundServer.status = ONLINE;
-  res.send(foundServer);
+  foundTask.status = ONLINE;
+  res.send(foundTask);
 });
 
 app.put("/tasks/:taskId/off", (req, res) => {
-  const foundServer = findServer(req, res);
+  const foundTask = findTask(req, res);
 
-  if (foundServer.status !== ONLINE) {
+  if (foundTask.status !== ONLINE) {
     return res.status(400).send({ errorMessage: `Server is not online` });
   }
 
-  foundServer.status = OFFLINE;
-  res.send(foundServer);
+  foundTask.status = OFFLINE;
+  res.send(foundTask);
 });
 
 app.put(`/tasks/:taskId/reboot`, (req, res) => {
-  const foundServer = findServer(req, res);
+  const foundTask = findTask(req, res);
 
-  if (foundServer.status !== ONLINE) {
+  if (foundTask.status !== ONLINE) {
     return res.status(400).send({ errorMessage: `Server is not online` });
   }
 
-  foundServer.status = GETTING_COINS;
+  foundTask.status = GETTING_COINS;
   setTimeout(() => {
-    foundServer.status = ONLINE;
+    foundTask.status = ONLINE;
   }, getRandomTime(1000, 5000));
 
-  res.send(foundServer);
+  res.send(foundTask);
 });
 
-function findServer(req, res) {
+function findTask(req, res) {
   const taskId = parseInt(req.params.taskId);
 
-  const foundServer = tasks.find((it) => it.id === taskId);
-  if (!foundServer) {
+  const foundTask = tasks.find((it) => it.id === taskId);
+  if (!foundTask) {
     throw res.status(404).send({ errorMessage: `Task does not exist` });
   }
-  return foundServer;
+  return foundTask;
 }
 
 function getRandomTime(min, max) {
