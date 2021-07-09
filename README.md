@@ -1,5 +1,4 @@
 ## Link to Project    [https://mern-314313.oa.r.appspot.com/](https://mern-314313.oa.r.appspot.com/)
-## Link to API tasks  [https://api-dot-mern-314313.oa.r.appspot.com/tasks](https://api-dot-mern-314313.oa.r.appspot.com/tasks)
 
 > #### Account SU
 
