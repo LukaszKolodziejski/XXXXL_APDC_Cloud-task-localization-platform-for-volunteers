@@ -58,4 +58,9 @@
   font-weight: bold;
   color: rgb(194, 190, 190);
   text-decoration: none;
+  transition: 0.3s;
+}
+
+.Logo a:hover {
+  color: rgb(226, 222, 222);
 }
