@@ -43,6 +43,7 @@ const MyMapComponent = compose(
       if (task.status === "DONE") coin = CoinRed24;
       if (task.status === "DONE" && task.id === activeDataList)
         coin = CoinRed32;
+      if (task.status === "CONFIRMED") return null;
 
       return <Marker key={task.id} position={{ lat, lng }} icon={coin} />;
     });
