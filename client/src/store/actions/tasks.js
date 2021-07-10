@@ -61,3 +61,36 @@ export const setCurrentTasks = (currentTasks) => (dispatch) => {
     currentTasks,
   });
 };
+
+const convertArrayToObject = (array, key) => {
+  const initialValue = {};
+  return array.reduce((obj, item) => {
+    return {
+      ...obj,
+      [item[key]]: item,
+    };
+  }, initialValue);
+};
+
+export const changeTaskStatus = (tasks, id, status) => (dispatch) => {
+  const newTasks = convertArrayToObject(tasks, "id");
+
+  const newTasksData = {
+    ...newTasks,
+    [id]: {
+      ...newTasks[id],
+      status,
+    },
+  };
+
+  axios.put(`/tasks.json`, newTasksData).then((res) => {
+    const tasks = [];
+    for (let key in res.data) {
+      tasks.push({ ...res.data[key], id: key });
+    }
+    dispatch({
+      type: actionTypes.CHANGE_TASK_STATUS,
+      tasks,
+    });
+  });
+};

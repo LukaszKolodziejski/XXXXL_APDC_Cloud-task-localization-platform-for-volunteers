@@ -13,4 +13,9 @@ export {
   changeAccountsStatus,
   deleteAccount,
 } from "./accounts";
-export { tasksList, saveTasksList, setCurrentTasks } from "./tasks";
+export {
+  tasksList,
+  saveTasksList,
+  setCurrentTasks,
+  changeTaskStatus,
+} from "./tasks";

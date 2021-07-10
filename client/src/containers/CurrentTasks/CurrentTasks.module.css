@@ -20,6 +20,10 @@
   border-radius: 20px;
   cursor: pointer;
   font-size: 16px;
+  transition: 0.3s;
+}
+.SaveBtn:hover {
+  background-color: rgb(142, 97, 39);
 }
 
 .DoneBtn {
@@ -37,4 +41,9 @@
   border-radius: 20px;
   cursor: pointer;
   font-size: 16px;
+  transition: 0.3s;
+}
+
+.DoneBtn:hover {
+  background-color: rgb(6, 99, 113);
 }

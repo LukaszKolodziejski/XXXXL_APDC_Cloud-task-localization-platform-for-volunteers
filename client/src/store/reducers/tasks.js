@@ -28,6 +28,11 @@ const setCurrentTasks = (state, action) => ({
   currentTasks: action.currentTasks,
 });
 
+const changeTaskStatus = (state, action) => ({
+  ...state,
+  tasks: action.tasks,
+});
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.TASKS_LIST:
@@ -38,6 +43,8 @@ const reducer = (state = initialState, action) => {
       return saveTasksList(state, action);
     case actionTypes.SET_CURRENT_TASKS:
       return setCurrentTasks(state, action);
+    case actionTypes.CHANGE_TASK_STATUS:
+      return changeTaskStatus(state, action);
     default:
       return state;
   }
