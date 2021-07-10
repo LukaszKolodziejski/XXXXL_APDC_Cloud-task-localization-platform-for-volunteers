@@ -21,9 +21,9 @@ const CurrentSingleTask = React.memo((props) => {
 
   let button;
   if (startGettingCoins) {
-    if (completedTasks === id) {
+    if (completedTasks === id - 1) {
       button = <button onClick={onTasksHandler}>CONFIRM</button>;
-    } else if (completedTasks > id) {
+    } else if (completedTasks > id - 1) {
       button = null;
     } else {
       button = <button disabled>CONFIRM</button>;
