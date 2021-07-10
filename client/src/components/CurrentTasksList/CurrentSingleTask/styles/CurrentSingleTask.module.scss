@@ -3,7 +3,8 @@
   // grid-template-columns: 21% 25% 1fr 22%;
   // grid-template-columns: 20% 25% 1fr 22%;
   grid-template-columns: 12% 25% 1fr 22%;
-  padding: 6px 0 6px 42px;
+  // padding: 6px 0 6px 42px;
+  padding: 8.5px 0 8.5px 42px;
   text-align: left;
   border-bottom: 2px solid #ededf0;
   color: #494e61;
@@ -45,8 +46,16 @@
     cursor: pointer;
     transition: 0.3s;
     font-weight: bold;
+
     &:hover {
       transform: translateX(5px);
+    }
+    &:disabled {
+      transform: translateX(0);
+      cursor: not-allowed;
+      border: 1px solid #999999;
+      background-color: #cccccc;
+      color: #666666;
     }
   }
 }

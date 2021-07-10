@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./CurrentTasksList.module.css";
 import CurrentSingleTask from "./CurrentSingleTask/CurrentSingleTask";
 import TopHeader from "../UX/TopHeader/TopHeader";
@@ -15,6 +15,9 @@ const CurrentTasksList = (props) => {
       description={task.description}
       onDescription={props.descriptionHandler}
       onActiveDataList={props.onActiveDataList}
+      startGettingCoins={props.startGettingCoins}
+      onTasksHandler={props.onTasksHandler}
+      completedTasks={props.completedTasks}
     />
   ));
 
