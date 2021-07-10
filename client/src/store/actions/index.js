@@ -17,5 +17,5 @@ export {
   tasksList,
   saveTasksList,
   setCurrentTasks,
-  changeTaskStatus,
+  changeTaskData,
 } from "./tasks";

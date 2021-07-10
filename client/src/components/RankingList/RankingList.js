@@ -24,6 +24,7 @@ const RankingList = (props) => {
       status={user.status}
       tasks={user.tasks}
       coins={user.coins}
+      userId={user.userId}
     />
   ));
 

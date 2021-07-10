@@ -72,25 +72,36 @@ const convertArrayToObject = (array, key) => {
   }, initialValue);
 };
 
-export const changeTaskStatus = (tasks, id, status) => (dispatch) => {
-  const newTasks = convertArrayToObject(tasks, "id");
+export const changeTaskData =
+  (tasks, id, status, completedTasks, playerId = null, playerName = null) =>
+  (dispatch) => {
+    const newTasks = convertArrayToObject(tasks, "id");
 
-  const newTasksData = {
-    ...newTasks,
-    [id]: {
-      ...newTasks[id],
-      status,
-    },
-  };
+    const newTasksData = {
+      ...newTasks,
+      [id]: playerId
+        ? {
+            ...newTasks[id],
+            status,
+            completedTasks,
+            playerId,
+            playerName,
+          }
+        : {
+            ...newTasks[id],
+            status,
+            completedTasks,
+          },
+    };
 
-  axios.put(`/tasks.json`, newTasksData).then((res) => {
-    const tasks = [];
-    for (let key in res.data) {
-      tasks.push({ ...res.data[key], id: key });
-    }
-    dispatch({
-      type: actionTypes.CHANGE_TASK_STATUS,
-      tasks,
+    axios.put(`/tasks.json`, newTasksData).then((res) => {
+      const tasks = [];
+      for (let key in res.data) {
+        tasks.push({ ...res.data[key], id: key });
+      }
+      dispatch({
+        type: actionTypes.CHANGE_TASK_DATA,
+        tasks,
+      });
     });
-  });
-};
+  };

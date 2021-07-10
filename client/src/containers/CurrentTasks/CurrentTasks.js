@@ -8,52 +8,108 @@ import CurrentTasksList from "../../components/CurrentTasksList/CurrentTasksList
 
 const CurrentTasks = (props) => {
   const [activeDataList, setActiveDataList] = useState(0);
-  const [newTasksList, setNewTasksList] = useState([]);
-  const [isSaved, setIsSaved] = useState(false);
   const [startGettingCoins, setStartGettingCoins] = useState(false);
   const { userId } = useSelector((state) => state.auth);
-  const { tasks, currentTasks } = useSelector((state) => state.tasks);
   const { accounts } = useSelector((state) => state.account);
-  const [creatorName, setCreatorName] = useState("");
-  const [completedTasks, setCompletedTasks] = useState(0);
+  const { tasks, currentTasks } = useSelector((state) => state.tasks);
+
+  const findCurrentTasks = () => tasks.find((task) => task.id === currentTasks);
+  const [completedTasks, setCompletedTasks] = useState(
+    findCurrentTasks() ? findCurrentTasks().completedTasks : 0
+  );
   const [redirectDoneTasks, setRedirectDoneTasks] = useState(false);
   const [btnMode, setBtnMode] = useState("START");
 
   const tasksHandler = () => setCompletedTasks((prev) => prev + 1);
 
   const dispatch = useDispatch();
-  const onSaveTasksList = (tasksList) =>
-    dispatch(actionCreators.saveTasksList(tasksList));
-
   const onAuthCheckState = () => dispatch(actionCreators.authCheckState());
   const onTasksList = () => dispatch(actionCreators.tasksList());
   const onChangeAccountsStatus = (accounts, id, status) =>
     dispatch(actionCreators.changeAccountsStatus(accounts, id, status));
+
+  const onChangeTaskData = (
+    tasks,
+    id,
+    status,
+    completedTasks,
+    playerId,
+    playerName
+  ) =>
+    dispatch(
+      actionCreators.changeTaskData(
+        tasks,
+        id,
+        status,
+        completedTasks,
+        playerId,
+        playerName
+      )
+    );
 
   useEffect(() => {
     onAuthCheckState();
     onTasksList();
   }, []);
 
-  useEffect(() => {
+  const getPublicUserName = () => {
     if (accounts.length) {
       const name = accounts.find(
         (account) => account.userId === userId
       ).publicUserId;
-      setCreatorName(name);
+      return name;
     }
-  }, [accounts]);
+  };
 
-  const findCurrentTasks = () => tasks.find((task) => task.id === currentTasks);
+  useEffect(() => {
+    const publicUserName = getPublicUserName();
+    if (completedTasks) {
+      if (completedTasks < findCurrentTasks().coins) {
+        changeTaskDataHandler(
+          currentTasks,
+          "INPROGRESS",
+          completedTasks,
+          publicUserName
+        );
+      } else if (completedTasks === findCurrentTasks().coins) {
+        changeTaskDataHandler(
+          currentTasks,
+          "DONE",
+          completedTasks,
+          publicUserName
+        );
+      }
+    }
+  }, [completedTasks]);
+
   const getCoinsHandler = () => {
+    const publicUserName = getPublicUserName();
     setStartGettingCoins(true);
     changeAccountsStatusHandler(userId, "GETTING_COINS");
-    changeTaskStatusHandler(currentTasks, "INPROGRESS");
+    changeTaskDataHandler(
+      currentTasks,
+      "INPROGRESS",
+      completedTasks,
+      publicUserName
+    );
   };
 
   const doneHandler = () => {
+    const publicUserName = getPublicUserName();
     setRedirectDoneTasks(true);
-    changeTaskStatusHandler(currentTasks, "DONE");
+    setCompletedTasks(findCurrentTasks().coins);
+    changeTaskDataHandler(currentTasks, "DONE", completedTasks, publicUserName);
+  };
+
+  const confirmHandler = () => {
+    const publicUserName = getPublicUserName();
+    setRedirectDoneTasks(true);
+    changeTaskDataHandler(
+      currentTasks,
+      "CONFIRMED",
+      completedTasks,
+      publicUserName
+    );
   };
 
   const changeAccountsStatusHandler = (userId, status) => {
@@ -62,15 +118,27 @@ const CurrentTasks = (props) => {
       onChangeAccountsStatus(accounts, user.id, status);
   };
 
-  const changeTaskStatusHandler = (currentTasks, status) => {
-    const task = tasks.find((task) => task.id === currentTasks);
-    if (task.status !== status)
-      dispatch(actionCreators.changeTaskStatus(tasks, task.id, status));
+  const changeTaskDataHandler = (
+    currentTasks,
+    status,
+    completedTasks,
+    playerName
+  ) => {
+    if (tasks) {
+      const task = tasks.find((task) => task.id === currentTasks);
+      onChangeTaskData(
+        tasks,
+        task.id,
+        status,
+        completedTasks,
+        userId,
+        playerName
+      );
+    }
   };
 
   useEffect(() => {
     const findTasks = findCurrentTasks();
-    // if (findTasks)
     if (findTasks && findTasks.data.length <= completedTasks)
       changeAccountsStatusHandler(userId, "ONLINE");
   }, [completedTasks]);
@@ -86,11 +154,11 @@ const CurrentTasks = (props) => {
       }
       if (tasksLength <= completedTasks || findTasks.status === "DONE") {
         setBtnMode("DONE");
-        changeTaskStatusHandler(currentTasks, "DONE");
       }
-      if (userId === null) setBtnMode("AUTH");
+      if (userId === null || findTasks.creatorId === userId) setBtnMode("AUTH");
+      if (findTasks.creatorId === userId && findTasks.status === "DONE")
+        setBtnMode("CONFIRM");
     }
-    //TODO: do firebase zliczać completed tasts
   }, [tasks, completedTasks]);
 
   if (redirectDoneTasks || !findCurrentTasks()) return <Redirect to="/" />;
@@ -103,16 +171,20 @@ const CurrentTasks = (props) => {
         completedTasks={completedTasks}
         onTasksHandler={tasksHandler}
       >
-        {/* {button} */}
         {btnMode === "START" ? (
-          <button className={styles.SaveBtn} onClick={() => getCoinsHandler()}>
+          <button className={styles.SaveBtn} onClick={getCoinsHandler}>
             Start to get Coins !!!
           </button>
         ) : btnMode === "DONE" ? (
-          <button className={styles.DoneBtn} onClick={() => doneHandler()}>
-            Wait for confirmation !!!
+          <button className={styles.DoneBtn} onClick={doneHandler}>
+            Finish work & Wait for confirmation !!!
           </button>
-        ) : btnMode === "INPROGRESS" ? null : btnMode === "AUTH" ? null : null}
+        ) : btnMode === "INPROGRESS" ? null : btnMode ===
+          "AUTH" ? null : btnMode === "CONFIRM" ? (
+          <button className={styles.ConfirmBtn} onClick={confirmHandler}>
+            Confirm execution of Tasks !!!
+          </button>
+        ) : null}
       </CurrentTasksList>
       <CurrentTasksMaps
         tasks={findCurrentTasks()}
