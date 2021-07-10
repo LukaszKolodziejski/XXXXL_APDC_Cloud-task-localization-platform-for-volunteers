@@ -17,6 +17,12 @@ const changeAccountsAttributes = (state, action) => ({
   loadingAccounts: action.loadingAccounts,
 });
 
+const changeAccountsStatus = (state, action) => ({
+  ...state,
+  accounts: action.accounts,
+  loadingAccounts: action.loadingAccounts,
+});
+
 const deleteAccount = (state, action) => ({
   ...state,
   accounts: action.accounts,
@@ -31,6 +37,8 @@ const reducer = (state = initialState, action) => {
     // return deleteAccount(state, action);
     case actionTypes.CHANGE_ACCOUNTS_ATTRIBUTES:
       return changeAccountsAttributes(state, action);
+    case actionTypes.CHANGE_ACCOUNTS_STATUS:
+      return changeAccountsStatus(state, action);
     default:
       return state;
   }

@@ -96,7 +96,7 @@ const SingleAccount = (props) => {
       <span className={classRole} onClick={roleHandler}>
         {myRole === "USER" ? null : role}
       </span>
-      {button}
+      {/* {button} */}
     </div>
   );
 };

@@ -3,7 +3,7 @@
   display: grid;
   -ms-grid-columns: 12% 25% 1fr 22%;
       grid-template-columns: 12% 25% 1fr 22%;
-  padding: 6px 0 6px 42px;
+  padding: 8.5px 0 8.5px 42px;
   text-align: left;
   border-bottom: 2px solid #ededf0;
   color: #494e61;
@@ -48,6 +48,15 @@
 .CurrentSingleTask button:hover {
   -webkit-transform: translateX(5px);
           transform: translateX(5px);
+}
+
+.CurrentSingleTask button:disabled {
+  -webkit-transform: translateX(0);
+          transform: translateX(0);
+  cursor: not-allowed;
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
 }
 
 .Coin {

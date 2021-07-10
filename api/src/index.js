@@ -13,8 +13,8 @@ const DONE = "DONE";
 
 app.use(function (req, res, next) {
   //TODO: change Origin before deploy
-  res.header("Access-Control-Allow-Origin", "*");
-  // res.header("Access-Control-Allow-Origin", "http://localhost:3000");
+  // res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Origin", "http://localhost:3000");
   res.header(
     "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept"
@@ -25,8 +25,6 @@ app.use(function (req, res, next) {
 
 app.get("/tasks", (req, res) => {
   request(dataStorage.tasks, (error, response, data) => {
-    console.error("error:", error); // Print the error if one occurred
-    console.log("statusCode:", response && response.statusCode); // Print the response status code if a response was received
     res.send(data);
     // saveDataRecovery(data, `tasksRecovery.json`);
   });
@@ -34,10 +32,8 @@ app.get("/tasks", (req, res) => {
 
 app.get("/accounts", (req, res) => {
   request(dataStorage.accounts, (error, response, data) => {
-    console.error("error:", error); // Print the error if one occurred
-    console.log("statusCode:", response && response.statusCode); // Print the response status code if a response was received
     res.send(data);
-    saveDataRecovery(data, `accountsRecovery.json`);
+    // saveDataRecovery(data, `accountsRecovery.json`);
   });
   res.send(data);
 });

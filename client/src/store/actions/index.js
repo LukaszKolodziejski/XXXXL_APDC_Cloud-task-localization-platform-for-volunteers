@@ -7,5 +7,10 @@ export {
   authCheckState,
   checkAuthTimeout,
 } from "./auth";
-export { accounts, changeAccountsAttributes, deleteAccount } from "./accounts";
+export {
+  accounts,
+  changeAccountsAttributes,
+  changeAccountsStatus,
+  deleteAccount,
+} from "./accounts";
 export { tasksList, saveTasksList, setCurrentTasks } from "./tasks";
