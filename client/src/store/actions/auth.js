@@ -2,13 +2,12 @@ import * as actionTypes from "./actionTypes";
 import * as actions from "./index";
 import axios from "../../axios-data";
 
-export const logout = () => (dispatch) => {
+export const logout = (userId) => (dispatch) => {
   localStorage.removeItem("token");
   localStorage.removeItem("expirationDate");
   localStorage.removeItem("userId");
   dispatch(actions.accounts(null));
   dispatch({ type: actionTypes.AUTH_LOGOUT });
-  //TODO: fn() to change Status to "OFFLINE"
 };
 
 // export const logout = () => {
