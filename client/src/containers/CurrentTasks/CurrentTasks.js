@@ -10,8 +10,8 @@ const CurrentTasks = (props) => {
   const [activeDataList, setActiveDataList] = useState(0);
   const [startGettingCoins, setStartGettingCoins] = useState(false);
   const { userId } = useSelector((state) => state.auth);
-  const { tasks, currentTasks } = useSelector((state) => state.tasks);
   const { accounts } = useSelector((state) => state.account);
+  const { tasks, currentTasks } = useSelector((state) => state.tasks);
 
   const findCurrentTasks = () => tasks.find((task) => task.id === currentTasks);
   const [completedTasks, setCompletedTasks] = useState(
