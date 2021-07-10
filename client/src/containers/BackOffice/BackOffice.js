@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import styles from "./Accounts.module.css";
+import styles from "./BackOffice.module.css";
 import ListAccounts from "../../components/ListAccounts/ListAccounts";
 import Spinner from "../../components/UI/Spinner/Spinner";
 import NoToken from "../../components/UX/NoToken/NoToken";
 import * as actionCreators from "../../store/actions/index";
 import { connect } from "react-redux";
 
-class Accounts extends Component {
+class BackOffice extends Component {
   // onLoadingAccounts() is Asynchronous function with 'redux-thunk',
   // created in actionCreators before Reducer
   // where the axios dispatching again fatchData asynchronously
@@ -28,7 +28,7 @@ class Accounts extends Component {
       allAccounts = <ListAccounts accounts={accounts} userId={userId} />;
     }
 
-    return <div className={styles.Accounts}>{allAccounts}</div>;
+    return <div className={styles.BackOffice}>{allAccounts}</div>;
   }
 }
 
@@ -42,4 +42,4 @@ const mapDispatchToProps = (dispatch) => ({
   onAuthCheckState: () => dispatch(actionCreators.authCheckState()),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Accounts);
+export default connect(mapStateToProps, mapDispatchToProps)(BackOffice);
