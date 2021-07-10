@@ -82,9 +82,7 @@ export const changeTaskStatus = (tasks, id, status) => (dispatch) => {
       status,
     },
   };
-  // console.log("redux");
-  // console.log("newTasksData");
-  // console.log(newTasksData);
+
   axios.put(`/tasks.json`, newTasksData).then((res) => {
     const tasks = [];
     for (let key in res.data) {
