@@ -1,9 +1,9 @@
 import React from "react";
+
 import styles from "./TasksList.module.css";
 import TopHeader from "../UX/TopHeader/TopHeader";
 
 import SingleTask from "./SingleTask/SingleTask";
-// import tasks from "./tasks.json";
 
 const TasksList = (props) => {
   const addTask = () => {
@@ -19,18 +19,21 @@ const TasksList = (props) => {
     "COINS TO EARN",
   ];
 
-  const listOfTasks = props.tasks.map((task) => (
-    <SingleTask
-      key={task.id}
-      id={task.id}
-      name={task.name}
-      status={task.status}
-      expiryDate={task.expiryDate}
-      coins={task.coins}
-      onActiveDataList={props.onActiveDataList}
-      onTasksHandler={props.onTasksHandler}
-    />
-  ));
+  const listOfTasks = props.tasks.map((task) =>
+    task.status !== "CONFIRMED" ? (
+      <SingleTask
+        key={task.id}
+        id={task.id}
+        name={task.name}
+        status={task.status}
+        creatorId={task.creatorId}
+        expiryDate={task.expiryDate}
+        coins={task.coins}
+        onActiveDataList={props.onActiveDataList}
+        onTasksHandler={props.onTasksHandler}
+      />
+    ) : null
+  );
 
   return (
     <section className={styles.TasksList}>
