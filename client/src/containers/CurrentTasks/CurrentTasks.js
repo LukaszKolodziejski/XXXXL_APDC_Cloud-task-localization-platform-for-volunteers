@@ -64,10 +64,17 @@ const CurrentTasks = (props) => {
   useEffect(() => {
     const publicUserName = getPublicUserName();
     if (completedTasks) {
-      if (completedTasks <= findCurrentTasks().coins) {
+      if (completedTasks < findCurrentTasks().coins) {
         changeTaskDataHandler(
           currentTasks,
           "INPROGRESS",
+          completedTasks,
+          publicUserName
+        );
+      } else if (completedTasks === findCurrentTasks().coins) {
+        changeTaskDataHandler(
+          currentTasks,
+          "DONE",
           completedTasks,
           publicUserName
         );
