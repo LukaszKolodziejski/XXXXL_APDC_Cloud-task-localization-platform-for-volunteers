@@ -8,6 +8,7 @@ import {
   Polyline,
 } from "react-google-maps";
 import Coin from "../../assets/coin.png";
+import CoinBlue from "../../assets/coinBlue24.png";
 
 const myKeyAPI = "AIzaSyB4r-FZ9lWpfLIYkjUjHyOthNeyyMpXJpg";
 
@@ -24,7 +25,7 @@ const MyMapComponent = compose(
   const [markerList, setMarkerList] = useState([]);
   const [lineDataList, onLineDataList] = useState([]);
 
-  const { activeDataList } = props;
+  const { activeDataList, completedTasks } = props;
 
   const wrapper = useRef(null);
 
@@ -34,20 +35,21 @@ const MyMapComponent = compose(
       const { lat, lng } = task.location;
       if (task.id === activeDataList) wrapper.current.panTo({ lat, lng });
 
-      let coin = Coin;
-      // let coin = task.id === activeDataList ? CoinGold32 : CoinGold24;
+      const coin = task.id <= completedTasks ? CoinBlue : Coin;
+      const label =
+        task.id <= completedTasks ? "" : { text: `${task.id}`, color: "#fff" };
       onLineDataList((prev) => [...prev, task.location]);
       return (
         <Marker
           key={task.id}
           position={{ lat, lng }}
           icon={coin}
-          label={{ text: `${task.id}`, color: "#fff" }}
+          label={label}
         />
       );
     });
     setMarkerList(fetchMerkersList);
-  }, [activeDataList, setMarkerList, wrapper]);
+  }, [activeDataList, completedTasks, setMarkerList, wrapper]);
 
   return (
     <GoogleMap
@@ -73,6 +75,7 @@ const Maps = (props) => {
       isMarkerShown
       tasks={props.tasks}
       activeDataList={props.activeDataList}
+      completedTasks={props.completedTasks}
     />
   );
 };
