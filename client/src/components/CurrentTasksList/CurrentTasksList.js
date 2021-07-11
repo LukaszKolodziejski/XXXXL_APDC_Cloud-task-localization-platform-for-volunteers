@@ -18,6 +18,8 @@ const CurrentTasksList = (props) => {
       startGettingCoins={props.startGettingCoins}
       onTasksHandler={props.onTasksHandler}
       completedTasks={props.completedTasks}
+      player={props.player}
+      userId={props.userId}
     />
   ));
 
