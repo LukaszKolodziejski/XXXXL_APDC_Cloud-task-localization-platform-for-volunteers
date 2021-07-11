@@ -5,6 +5,7 @@ import * as actionCreators from "../../store/actions/index";
 import styles from "./CurrentTasks.module.css";
 import CurrentTasksMaps from "../../components/Maps/CurrentTasksMaps";
 import CurrentTasksList from "../../components/CurrentTasksList/CurrentTasksList";
+import Progress from "../../components/Status/Progress/Progress";
 
 const CurrentTasks = (props) => {
   const [activeDataList, setActiveDataList] = useState(0);
@@ -19,6 +20,7 @@ const CurrentTasks = (props) => {
   );
   const [redirectDoneTasks, setRedirectDoneTasks] = useState(false);
   const [btnMode, setBtnMode] = useState("START");
+  const [player, setPlayer] = useState("");
 
   const tasksHandler = () => setCompletedTasks((prev) => prev + 1);
 
@@ -103,13 +105,16 @@ const CurrentTasks = (props) => {
 
   const confirmHandler = () => {
     const publicUserName = getPublicUserName();
-    setRedirectDoneTasks(true);
-    changeTaskDataHandler(
-      currentTasks,
-      "CONFIRMED",
-      completedTasks,
-      publicUserName
-    );
+
+    //TODO: uncoment redirect
+    // setRedirectDoneTasks(true);
+    if (tasks) {
+      const task = tasks.find((task) => task.id === currentTasks);
+      onChangeTaskData(tasks, task.id, "DONE", completedTasks);
+      // onChangeTaskData(tasks, task.id, "CONFIRMED", completedTasks);
+
+      //TODO: transfer coinów
+    }
   };
 
   const changeAccountsStatusHandler = (userId, status) => {
@@ -126,14 +131,18 @@ const CurrentTasks = (props) => {
   ) => {
     if (tasks) {
       const task = tasks.find((task) => task.id === currentTasks);
-      onChangeTaskData(
-        tasks,
-        task.id,
-        status,
-        completedTasks,
-        userId,
-        playerName
-      );
+      if (task.playerId === "") {
+        onChangeTaskData(
+          tasks,
+          task.id,
+          status,
+          completedTasks,
+          userId,
+          playerName
+        );
+      } else if (task.playerId === userId) {
+        onChangeTaskData(tasks, task.id, status, completedTasks);
+      }
     }
   };
 
@@ -156,8 +165,16 @@ const CurrentTasks = (props) => {
         setBtnMode("DONE");
       }
       if (userId === null || findTasks.creatorId === userId) setBtnMode("AUTH");
-      if (findTasks.creatorId === userId && findTasks.status === "DONE")
-        setBtnMode("CONFIRM");
+
+      if (tasks) {
+        const { creatorId, playerName } = findCurrentTasks();
+        if (userId === creatorId) {
+          setBtnMode("CREATOR_INPROGRESS");
+          setPlayer(playerName);
+        }
+        if (findTasks.creatorId === userId && findTasks.status === "DONE")
+          setBtnMode("CONFIRM");
+      }
     }
   }, [tasks, completedTasks]);
 
@@ -170,11 +187,17 @@ const CurrentTasks = (props) => {
         startGettingCoins={startGettingCoins}
         completedTasks={completedTasks}
         onTasksHandler={tasksHandler}
+        player={player}
+        userId={userId}
       >
         {btnMode === "START" ? (
           <button className={styles.SaveBtn} onClick={getCoinsHandler}>
             Start to get Coins !!!
           </button>
+        ) : btnMode === "CREATOR_INPROGRESS" ? (
+          <span className={styles.Progress}>
+            {player ? <Progress status={`${player} is getting coins`} /> : null}
+          </span>
         ) : btnMode === "DONE" ? (
           <button className={styles.DoneBtn} onClick={doneHandler}>
             Finish work & Wait for confirmation !!!
@@ -182,13 +205,14 @@ const CurrentTasks = (props) => {
         ) : btnMode === "INPROGRESS" ? null : btnMode ===
           "AUTH" ? null : btnMode === "CONFIRM" ? (
           <button className={styles.ConfirmBtn} onClick={confirmHandler}>
-            Confirm execution of Tasks !!!
+            {`Confirm that ${player} has completed the tasks :)`}
           </button>
         ) : null}
       </CurrentTasksList>
       <CurrentTasksMaps
         tasks={findCurrentTasks()}
         activeDataList={activeDataList}
+        completedTasks={completedTasks}
       />
     </div>
   );

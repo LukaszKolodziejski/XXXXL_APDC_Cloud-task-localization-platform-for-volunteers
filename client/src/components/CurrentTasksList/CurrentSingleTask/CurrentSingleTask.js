@@ -11,6 +11,8 @@ const CurrentSingleTask = React.memo((props) => {
     startGettingCoins,
     onTasksHandler,
     completedTasks,
+    player,
+    userId,
   } = props;
   const style = styles.CurrentSingleTask;
 
@@ -21,13 +23,14 @@ const CurrentSingleTask = React.memo((props) => {
 
   let button;
   if (startGettingCoins) {
-    if (completedTasks === id - 1) {
-      button = <button onClick={onTasksHandler}>CONFIRM</button>;
-    } else if (completedTasks > id - 1) {
+    if (completedTasks > id - 1 || player) {
       button = null;
+    } else if (completedTasks === id - 1) {
+      button = <button onClick={onTasksHandler}>CONFIRM</button>;
     } else {
       button = <button disabled>CONFIRM</button>;
     }
+    if (!userId) button = null;
   }
 
   return (
