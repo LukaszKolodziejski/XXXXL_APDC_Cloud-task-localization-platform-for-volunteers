@@ -121,6 +121,9 @@ class User extends Component {
     const account = {
       role: "USER",
       state: "ENABLED",
+      status: "ONLINE",
+      coins: 10,
+      tasks: 0,
       userId: this.props.userId ? this.props.userId : "Wrong user ID",
       email: this.props.email,
       publicUserId: this.props.publicUserId,
@@ -210,13 +213,8 @@ Lisbon
   render() {
     const allInputs = [];
     for (const key in this.state.userForm) {
-      const {
-        elementType,
-        elementConfig,
-        value,
-        valid,
-        validation,
-      } = this.state.userForm[key];
+      const { elementType, elementConfig, value, valid, validation } =
+        this.state.userForm[key];
       allInputs.push(
         <Input
           key={key}
