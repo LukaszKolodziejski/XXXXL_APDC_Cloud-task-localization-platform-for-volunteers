@@ -12,6 +12,7 @@ export {
   changeAccountsAttributes,
   changeAccountsStatus,
   deleteAccount,
+  transferOfCoins,
 } from "./accounts";
 export {
   tasksList,
