@@ -29,6 +29,10 @@ const CurrentTasks = (props) => {
   const onTasksList = () => dispatch(actionCreators.tasksList());
   const onChangeAccountsStatus = (accounts, id, status) =>
     dispatch(actionCreators.changeAccountsStatus(accounts, id, status));
+  const onTransferOfCoins = (accounts, creatorId, playerId, coins) =>
+    dispatch(
+      actionCreators.transferOfCoins(accounts, creatorId, playerId, coins)
+    );
 
   const onChangeTaskData = (
     tasks,
@@ -104,16 +108,12 @@ const CurrentTasks = (props) => {
   };
 
   const confirmHandler = () => {
-    const publicUserName = getPublicUserName();
-
-    //TODO: uncoment redirect
-    // setRedirectDoneTasks(true);
+    setRedirectDoneTasks(true);
     if (tasks) {
       const task = tasks.find((task) => task.id === currentTasks);
-      onChangeTaskData(tasks, task.id, "DONE", completedTasks);
-      // onChangeTaskData(tasks, task.id, "CONFIRMED", completedTasks);
-
-      //TODO: transfer coinów
+      onChangeTaskData(tasks, task.id, "CONFIRMED", completedTasks);
+      const { creatorId, playerId, coins } = findCurrentTasks();
+      onTransferOfCoins(accounts, creatorId, playerId, coins);
     }
   };
 

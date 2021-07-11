@@ -117,3 +117,36 @@ export const deleteAccount = (accounts, id) => (dispatch) => {
     });
   });
 };
+
+export const transferOfCoins =
+  (accounts, creatorId, playerId, coins) => (dispatch) => {
+    const newAccounts = convertArrayToObject(accounts, "id");
+
+    const creator = accounts.find((account) => account.userId === creatorId);
+    const player = accounts.find((account) => account.userId === playerId);
+
+    const newAccountsData = {
+      ...newAccounts,
+      [creator.id]: {
+        ...newAccounts[creator.id],
+        coins: creator.coins - coins,
+      },
+      [player.id]: {
+        ...newAccounts[player.id],
+        coins: player.coins + coins,
+        tasks: player.tasks + 1,
+      },
+    };
+
+    axios.put(`/accounts.json`, newAccountsData).then((res) => {
+      const accounts = [];
+      for (let key in res.data) {
+        accounts.push({ ...res.data[key], id: key });
+      }
+      dispatch({
+        type: actionTypes.TRANSFER_OF_COINS,
+        accounts,
+        loadingAccounts: false,
+      });
+    });
+  };

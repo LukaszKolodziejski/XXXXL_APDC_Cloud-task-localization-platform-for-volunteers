@@ -36,19 +36,6 @@ const TasksMap = (props) => {
     }
   };
 
-  // TODO: >> Start do Task: Task have PLAYER
-  // TODO: >> Start do Task:  {PLAYER} is getting coins...
-
-  // TODO: >> End do Task: Owner must confirm
-  // TODO: >> End do Task: Online + Coiny + Complited Tasks
-
-  // TODO: >> zadanie może wykonać ktoś inny
-
-  // TODO: TODO: BACKEND !!!!!!!
-
-  // TODO: >> Jak ktoś się zaloguje: Offline > Online
-  // TODO: >> Jak ktoś się wyloguje: Online > Offline
-
   useEffect(() => {
     const load = async () => {
       onTasksList();
@@ -57,8 +44,6 @@ const TasksMap = (props) => {
     };
     load();
   }, []);
-
-  // const tasksHandler = (currentTasks) => onSetCurrentTasks(currentTasks);
 
   if (loadingTasks || tasks.length === 0) return <Spinner />;
   return (
