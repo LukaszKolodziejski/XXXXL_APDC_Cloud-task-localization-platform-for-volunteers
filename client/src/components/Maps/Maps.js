@@ -12,6 +12,7 @@ import CoinGold24 from "../../assets/coinGold24.png";
 import CoinGold32 from "../../assets/coinGold32.png";
 import CoinRed24 from "../../assets/coinRed24.png";
 import CoinRed32 from "../../assets/coinRed32.png";
+import { InfoBox } from "react-google-maps/lib/components/addons/InfoBox";
 
 const myKeyAPI = "AIzaSyB4r-FZ9lWpfLIYkjUjHyOthNeyyMpXJpg";
 
@@ -26,6 +27,8 @@ const MyMapComponent = compose(
   withGoogleMap
 )((props) => {
   const [markerList, setMarkerList] = useState([]);
+  const [isOpenId, setIsOpenId] = useState(null);
+
   const { activeDataList } = props;
 
   const wrapper = useRef(null);
@@ -45,10 +48,50 @@ const MyMapComponent = compose(
         coin = CoinRed32;
       if (task.status === "CONFIRMED") return null;
 
-      return <Marker key={task.id} position={{ lat, lng }} icon={coin} />;
+      return (
+        <Marker
+          key={task.id}
+          position={{ lat, lng }}
+          icon={coin}
+          onClick={() =>
+            setIsOpenId((prev) => (prev !== task.id ? task.id : null))
+          }
+        >
+          {task.id === isOpenId && (
+            <InfoBox
+              options={{ closeBoxURL: ``, enableEventPropagation: true }}
+              defaultPosition={task.location}
+            >
+              <div
+                onClick={() => setIsOpenId(null)}
+                style={{
+                  backgroundColor: `white`,
+                  opacity: 0.75,
+                  padding: `5px 5px`,
+                  border: "1px solid #000",
+                  borderRadius: "5px",
+                }}
+              >
+                <div style={{ fontSize: `16px`, fontColor: `#08233B` }}>
+                  Creator:{" "}
+                  <span style={{ fontWeight: "bold" }}>{task.name}</span>
+                </div>
+                <div style={{ fontSize: `16px`, fontColor: `#08233B` }}>
+                  Coins to earn:{" "}
+                  <span style={{ fontWeight: "bold" }}>{task.coins}</span>
+                </div>
+                <div style={{ fontSize: `16px`, fontColor: `#08233B` }}>
+                  Tasks status:{" "}
+                  <span style={{ fontWeight: "bold" }}>{task.status}</span>
+                </div>
+              </div>
+            </InfoBox>
+          )}
+        </Marker>
+      );
     });
     setMarkerList(fetchMerkersList);
-  }, [activeDataList, setMarkerList, wrapper]);
+  }, [activeDataList, setMarkerList, wrapper, isOpenId]);
 
   return (
     <GoogleMap
@@ -56,8 +99,6 @@ const MyMapComponent = compose(
       defaultZoom={12}
       defaultCenter={{ lat: 38.7142128, lng: -9.1838334 }}
       onClick={(e) => {
-        console.log(e.latLng.lat());
-        console.log(e.latLng.lng());
         wrapper.current.panTo(e.latLng);
       }}
     >
