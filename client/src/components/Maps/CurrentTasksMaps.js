@@ -7,6 +7,7 @@ import {
   Marker,
   Polyline,
 } from "react-google-maps";
+import { InfoBox } from "react-google-maps/lib/components/addons/InfoBox";
 import Coin from "../../assets/coin.png";
 import CoinBlue from "../../assets/coinBlue24.png";
 
@@ -24,32 +25,59 @@ const MyMapComponent = compose(
 )((props) => {
   const [markerList, setMarkerList] = useState([]);
   const [lineDataList, onLineDataList] = useState([]);
+  const [isOpenNumer, setIsOpenNumer] = useState(null);
 
-  const { activeDataList, completedTasks } = props;
+  const { activeDataList, completedTasks, tasks } = props;
 
   const wrapper = useRef(null);
 
   useEffect(() => {
-    console.log(props.tasks);
     const fetchMerkersList = props.tasks.data.map((task) => {
       const { lat, lng } = task.location;
       if (task.id === activeDataList) wrapper.current.panTo({ lat, lng });
-
       const coin = task.id <= completedTasks ? CoinBlue : Coin;
       const label =
         task.id <= completedTasks ? "" : { text: `${task.id}`, color: "#fff" };
-      onLineDataList((prev) => [...prev, task.location]);
+      onLineDataList((prev) =>
+        prev.length < tasks.data.length ? [...prev, task.location] : prev
+      );
+
       return (
         <Marker
           key={task.id}
           position={{ lat, lng }}
           icon={coin}
           label={label}
-        />
+          onClick={() =>
+            setIsOpenNumer((prev) => (prev !== task.id ? task.id : null))
+          }
+        >
+          {task.id === isOpenNumer && (
+            <InfoBox
+              options={{ closeBoxURL: ``, enableEventPropagation: true }}
+              defaultPosition={task.location}
+            >
+              <div
+                onClick={() => setIsOpenNumer(null)}
+                style={{
+                  backgroundColor: `white`,
+                  opacity: 0.75,
+                  padding: `5px 5px`,
+                  border: "1px solid #000",
+                  borderRadius: "5px",
+                }}
+              >
+                <div style={{ fontSize: `16px`, fontColor: `#08233B` }}>
+                  {task.description}
+                </div>
+              </div>
+            </InfoBox>
+          )}
+        </Marker>
       );
     });
     setMarkerList(fetchMerkersList);
-  }, [activeDataList, completedTasks, setMarkerList, wrapper]);
+  }, [activeDataList, completedTasks, setMarkerList, wrapper, isOpenNumer]);
 
   return (
     <GoogleMap
