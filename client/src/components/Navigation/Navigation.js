@@ -35,7 +35,7 @@ const Navigation = (props) => {
           {idToken ? (
             <>
               <NavigationItem link="/new-task" text="NEW Task" />
-              <NavigationItem link="/account" text="My Account" />
+              {/* <NavigationItem link="/account" text="My Account" /> */}
               {backOffice}
             </>
           ) : null}
