@@ -24,7 +24,6 @@ const App = () => {
         <Route path="/current-tasks" component={CurrentTasks} />
         <Route path="/back-office" component={BackOffice} />
         {/* <Route path="/account" component={Accounts} /> */}
-        <Route path="/account" />
       </Layout>
     </Router>
   );
